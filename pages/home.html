@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <title>Home Page</title>
 </head>
-<body> 
+<body id="home"> 
 
     <!-- Back to top button -->
     <img 
@@ -47,10 +47,10 @@
                         <a href="#home" class="nav-link">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#services" class="nav-link">SERVICES</a>
+                        <a href="./services.html" class="nav-link">SERVICES</a>
                     </li>
                     <li class="nav-item">
-                        <a href="./about.html" class="nav-link">ABOUT</a>
+                        <a href="./about.html" class="nav-link">ABOUT US</a>
                     </li>
                     <li class="nav-item">
                         <a href="#contact" class="nav-link">CONTACT</a>
@@ -78,21 +78,21 @@
                   <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                  <div class="carousel-item active" data-interval="100">
                     <img src="../assets/black-female-doctor-examining-small-boy-with-stethoscope-during-home-visit-due-covid19-pandemic.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                       <h5 class="fs-1">The Secret to Long Life</h5>
                       <p class="fs-3">Some representative placeholder content for the first slide.</p>
                     </div>
                   </div>
-                  <div class="carousel-item">
+                  <div class="carousel-item" data-interval="100">
                     <img src="../assets/injecting.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                       <h5 class="fs-1">We Offer Home Care Services</h5>
                       <p class="fs-3">Some representative placeholder content for the second slide.</p>
                     </div>
                   </div>
-                  <div class="carousel-item">
+                  <div class="carousel-item" data-interval="100">
                     <img src="../assets/doctor_is_available.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                       <h5 class="fs-1">Some other info</h5>
@@ -152,7 +152,7 @@
             <h1 class="blue-text text-center my-5">Some of the services we offer include</h1>
             <div class="row justify-content-center g-4">
                     <!-- Cards -->
-                <div class="col-8 col-lg-4 col-xxl-3">
+                <div class="col-8 col-md-6 col-lg-4 col-xxl-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="../assets/stethoscope.jpg" alt="stethoscope">
                         <div class="card-body">
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 col-lg-4 col-xxl-3">
+                <div class="col-8 col-md-6 col-lg-4 col-xxl-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="../assets/doctor_patient.png" alt="doctor_patient">
                         <div class="card-body">
@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 col-lg-4 col-xxl-3">
+                <div class="col-8 col-md-6 col-lg-4 col-xxl-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="../assets/injecting_patient.png" alt="injecting_patient">
                         <div class="card-body">
@@ -182,17 +182,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 col-lg-4 col-xxl-3">
+                <div class="col-8 col-md-6 col-lg-4 col-xxl-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="../assets/female_doc.png" alt="female_doc">
                         <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                <a href="#about" class="btn btn-outline-info border-2 d-md-inline px-2 fw-bold">Read More</a>
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#about" class="btn btn-outline-info border-2 d-md-inline px-2 fw-bold">Read More</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-8 col-lg-4 col-xxl-3">
+                <div class="col-8 col-md-6 col-lg-4 col-xxl-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="../assets/african_baby.jpg" alt="african_baby">
                         <div class="card-body">
@@ -205,6 +205,23 @@
             </div>
         </div>
     </section>
+    <!-- Time Table -->
+    <section id="time-table">
+        <div class="container-lg py-5">
+            <div class="row justify-content-center">
+                <img class="col-sm-8 col-md-5 col-lg-4 col-xxl-3
+                l-3 col-lg-3 p-0 " src="../assets/doctor_is_available.jpg" alt="female_doc">
+                <div class="cust-card col-sm-8 col-md-5 col-lg-4 col-xxl-3
+                l-3 col-lg-3 text-white p-5">
+                    <h5 class="pb-3"><img src="../assets/clock-fill.svg" alt="clock">&nbsp;&nbsp;Our Available Hours Are:</h5>
+                    <p class="card-text pb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#about" class="btn btn-outline-light border-2 d-md-inline px-2 fw-bold">Make An Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--XXXXX Time Table -->
+
 
     <!-- FOOTER -->
 
