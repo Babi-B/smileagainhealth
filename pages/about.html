@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/app.js"></script>
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <title>About Page</title>
+</head>
+<body> 
+
+    <!-- Back to top button -->
+    <img 
+        src="../assets/arrow-up-circle-fill.svg" 
+        alt="to top"
+        type="button"
+        class="btn btn-floating btn-lg"
+        id="btn-back-to-top"
+        onclick="backToTop()"
+    />
+
+    <header id="header">
+        <div class="contacts container-lg">
+            <!-- <span class="mx-2"><img src="../assets/telephone-fill.svg" alt="tele" class="header-svg" />&nbsp;+237-612-345-678</span> -->
+            <a href="#"><span class="mx-2"><img src="../assets/whatsapp.svg" alt="whatsapp" class="header-svg" />&nbsp;+237612345678</span></a>
+            <span class="mx-2"><img src="../assets/geo-alt-fill.svg" alt="loaction" class="header-svg" />&nbsp;Buea, Cameroon</span>
+            <a href="#"><span class="mx-2"><img src="../assets/envelope-fill.svg" alt="email" class="header-svg" />&nbsp;smileagainhealth@gmail.com</span></a>
+        </div>
+    </header>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-light sticky-top bg-white">
+        <div class="container-lg">
+            <a href="./home.html" class="navbar-brand">
+                <img src="../assets/logo.png" alt="logo"  id="logo" height="60" width="60">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Actual Nav links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav fw-bold">
+                    <li class="nav-item">
+                        <a href="./home.html" class="nav-link">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">SERVICES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">CONTACT</a>
+                    </li>
+                    <li class="nav-item d-md-none">
+                        <a href="#appointment" class="nav-link">APPOINTMENT</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline px-1 rounded" id="appoint-btn">
+                        <a href="#appointment" class="nav-link text-white">APPOINTMENT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR -->
+
+
+    <!-- Mini Column -->
+    <section id="mini-column" >
+        <div class="d-flex justify-content-around text-white py-5 cust-grad">
+        <h2>About Us </h2>
+        <h4><a href="./home.html" class="text-white">Home</a> | <a href="#" class="text-info">About Us</a></h4>
+        </div>
+    </section>
+    <!-- XXXXXX Mini Column -->
+
+    <!-- Main About Us Section -->
+    <section id="bg-infomation">
+        <div class="container-lg py-5">
+            <h3 class="blue-text">Who We Are</h3>
+            <div class="custom-hr mb-5"></div>
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-6 p-0">
+                    <img src="../assets/group.jpg" alt="the team" class="w-100">
+                </div>
+                <div class="col-sm-8 col-md-6 bg-gray p-5 bottom-border">
+                    <h5 class="blue-text">Lorem ipsum dolor sit amet.</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam rem ipsum illo excepturi voluptatem sunt tenetur, in similique doloribus quae.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="team">
+        <div class="container-lg py-5">
+            <h3 class="blue-text">Our Healthcare Administration</h3>
+            <div class="custom-hr mb-5"></div>
+            <div class="row justify-content-center g-4 text-center">
+                    <!-- Cards -->
+                <div class="col-8 col-lg-4 col-xxl-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../assets/female_doc.png" alt="doc">
+                        <div class="card-body">
+                        <h5 class="card-title">Dr. Lucy</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Dentist</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 col-lg-4 col-xxl-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../assets/female_doc.png" alt="doc">
+                        <div class="card-body">
+                        <h5 class="card-title">Dr. Lucy</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Dentist</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 col-lg-4 col-xxl-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../assets/female_doc.png" alt="doc">
+                        <div class="card-body">
+                        <h5 class="card-title">Dr. Lucy</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Dentist</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 col-lg-4 col-xxl-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../assets/female_doc.png" alt="doc">
+                        <div class="card-body">
+                        <h5 class="card-title">Dr. Lucy</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Dentist</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 col-lg-4 col-xxl-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../assets/female_doc.png" alt="doc">
+                        <div class="card-body">
+                        <h5 class="card-title">Dr. Lucy</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Dentist</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Information -->
+    <section id="bg-infomation">
+        <div class="container-lg py-5">
+            <div class="row g-4">
+                <div class="col-md-12 col-lg-6">
+                    <h3 class="blue-text ">More About Us</h3>
+                    <div class="custom-hr mb-5"></div> 
+                    <div class="accordion accordion-flush justify-self-center" id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-blue text-white bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                              Why Choose Us?
+                            </button>
+                          </h2>
+                          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                              Our Principles/Philosopy
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                              Our Mission
+                            </button>
+                          </h2>
+                          <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                Our Vision
+                            </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Testimonies -->
+                <div id="testimonies" class=" col-md-12 col-lg-6">
+                    <h3 class="blue-text ">Testimonials</h3>
+                    <div class="custom-hr mb-5"></div>
+                    <div id="carousel">
+                        <div id="carouselExampleCaptions" class="carousel slide py-5 px-3" data-bs-ride="carousel">
+                            <div class="carousel-inner text-center">
+                              <div class="carousel-item active" data-interval="10">
+                                <img src="../assets/african_baby.jpg" alt="...">
+                                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur tenetur architecto obcaecati laborum itaque. Nihil quia amet architecto dolores at?</p>
+                              </div>
+                              <div class="carousel-item" data-interval="10">
+                                <img src="../assets/injecting.jpg" alt="...">
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quis et praesentium eos sed? Voluptas, illum. Saepe delectus rem at?</p>
+                              </div>
+                              <div class="carousel-item" data-interval="10">
+                                <img src="../assets/doctor_is_available.jpg" alt="...">
+                                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id mollitia atque corporis sapiente impedit dolorem velit aliquam, a nihil. Animi.</p>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--xxxxxxxx Main About Us Section -->
+
+    <!-- FOOTER -->
+
+    <footer class="text-center text-lg-start text-white pt-5">
+        <!-- Section: Social media -->
+        <section class="p-4 border-bottom">
+        <!-- Left -->
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class=" col-sm-6 col-lg-3 ">
+                        <span>Get connected with us on social networks:</span>
+                    </div>
+                    <!-- Left -->
+                
+                    <!-- Right (the icons) -->
+                    <div class="col-sm-6 col-lg-3">
+                        <a href="" class="me-4 text-reset">
+                            <img src="../assets/facebook.svg" alt="facebook">
+                        </a>
+                        <a href="" class="me-4 text-reset">
+                            <img src="../assets/instagram.svg" alt="instagram">
+                        </a>
+                        <a href="" class="me-4 text-reset">
+                            <img src="../assets/whatsapp.svg" alt="whatsapp" width="20" height="20">
+                        </a>
+                    </div>
+            </div>
+        </div>
+        <!-- Right -->
+        </section>
+        <!--XXX-- Section: Social media --XXX-->
+    
+        <!-- Section: Links  -->
+        <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <!-- Content -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>SACFU
+                </h6>
+                <p>
+                Here you can use rows and columns to organize your footer content. Lorem ipsum
+                dolor sit amet, consectetur adipisicing elit.
+                </p>
+            </div>
+            <!-- Grid column -->
+    
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                Services
+                </h6>
+                <p>
+                <a href="#services" class="text-reset">24/7 home care</a>
+                </p>
+                <p>
+                <a href="#services" class="text-reset">Other</a>
+                </p>
+                <p>
+                <a href="#services" class="text-reset">Other</a>
+                </p>
+                <p>
+                <a href="#services" class="text-reset">Other</a>
+                </p>
+            </div>
+            <!-- Grid column -->
+    
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                Our Other Platforms
+                </h6>
+                <p>
+                <a href="#!" class="text-reset">Smile Again Edu</a>
+                </p>
+                <p>
+                <a href="#!" class="text-reset">Smile Again Charity</a>
+                </p>
+                <p>
+                <a href="#!" class="text-reset">Other</a>
+                </p>
+                <p>
+                <a href="#!" class="text-reset">Other</a>
+                </p>
+            </div>
+            <!-- Grid column -->
+    
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
+                <p><i class="fas fa-home me-3"></i> Buea, SW 10012, CMR</p>
+                <p>
+                <i class="fas fa-envelope me-3"></i>
+                info@example.com
+                </p>
+                <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            </div>
+            <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+        </section>
+        <!-- Section: Links  -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2023 Copyright:
+        <a class="text-reset fw-bold" href="https://github.com/Babi-B">Babi Beulah (Developer)</a>. All Rights Reserved
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+</body>
+</html>
