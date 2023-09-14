@@ -24,11 +24,11 @@
     />
 
     <header id="header">
-        <div class="contacts container-lg">
+        <div class="contacts container-lg d-flex flex-wrap">
             <!-- <span class="mx-2"><img src="../assets/telephone-fill.svg" alt="tele" class="header-svg" />&nbsp;+237-612-345-678</span> -->
-            <a href="#"><span class="mx-2"><img src="../assets/whatsapp.svg" alt="whatsapp" class="header-svg" />&nbsp;+237612345678</span></a>
-            <span class="mx-2"><img src="../assets/geo-alt-fill.svg" alt="loaction" class="header-svg" />&nbsp;Buea, Cameroon</span>
-            <a href="#"><span class="mx-2"><img src="../assets/envelope-fill.svg" alt="email" class="header-svg" />&nbsp;smileagainhealth@gmail.com</span></a>
+            <span class="mx-2 my-1"><a href="#"><img src="../assets/whatsapp.svg" alt="whatsapp" class="header-svg" />&nbsp;+237612345678</a></span>
+            <span class="mx-2 my-1"><img src="../assets/geo-alt-fill.svg" alt="loaction" class="header-svg" />&nbsp;Buea, Cameroon</span>
+            <span class="mx-2 my-1"><a href="#"><img src="../assets/envelope-fill.svg" alt="email" class="header-svg" />&nbsp;smileagainhealth@gmail.com</a></span>
         </div>
     </header>
     <!-- NAVBAR -->
@@ -48,13 +48,13 @@
                         <a href="./home.html" class="nav-link">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#services" class="nav-link">SERVICES</a>
+                        <a href="./services.html" class="nav-link">SERVICES</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">ABOUT US</a>
+                        <a href="#" class="nav-link blue-text">ABOUT US</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">CONTACT</a>
+                        <a href="./contact.html" class="nav-link">CONTACT</a>
                     </li>
                     <li class="nav-item d-md-none">
                         <a href="#appointment" class="nav-link">APPOINTMENT</a>
@@ -70,10 +70,14 @@
 
 
     <!-- Mini Column -->
-    <section id="mini-column" >
-        <div class="d-flex justify-content-around text-white py-5 cust-grad">
-        <h2>About Us </h2>
-        <h4><a href="./home.html" class="text-white">Home</a> | <a href="#" class="text-info">About Us</a></h4>
+    <section class="bg-blue">
+        <div class="cust-grad">
+            <div class="container-lg">
+                <div class="d-flex justify-content-between text-white py-5">
+                    <h2>About Us </h2>
+                    <h4><a href="./home.html" class="text-white">Home</a> | <a href="#" class="text-info">About Us</a></h4>
+                </div>        
+            </div>
         </div>
     </section>
     <!-- XXXXXX Mini Column -->
@@ -234,6 +238,25 @@
             </div>
         </div>
     </section>
+
+    <!-- Time Table -->
+    <section id="time-table">
+        <div class="container-lg py-5">
+            <h3 class="blue-text ">Our Available Times</h3>
+            <div class="custom-hr mb-5"></div>
+            <div class="row justify-content-center">
+                <img class="col-sm-8 col-md-5 col-lg-4 col-xxl-3
+                l-3 col-lg-3 p-0 " src="../assets/doctor_is_available.jpg" alt="female_doc">
+                <div class="cust-card col-sm-8 col-md-5 col-lg-4 col-xxl-3
+                l-3 col-lg-3 text-white p-5">
+                    <h6 class="text pb-3"><img src="../assets/clock-fill.svg" alt="clock">&nbsp;Our Available Hours Are:</h6>
+                    <p class="card-text pb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#about" class="btn btn-outline-light border-2 d-block px-2 fw-bold">Make An Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--XXXXX Time Table -->
 
     <!--xxxxxxxx Main About Us Section -->
 
