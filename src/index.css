@@ -1,69 +1,161 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --theme-color:#488FB1;
+  --secondary-color:rgb(254, 187, 52);
+  --link-color:#09c6f9;
+  --red: rgb(183, 3, 3);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* CUSTOM CLASSES */
+.blue-text {
+  color: var(--theme-color);
 }
 
+.cust-grad {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.custom-hr {
+  width: 100px;
+  height: 2px;
+  background-color: rgb(207, 206, 206);
+}
+.bg-gray {
+  background-color: rgb(239, 239, 239);
+}
+.bg-blue {
+  background-color: var(--theme-color);
+}
+.bottom-border {
+  border-bottom: 5px solid var(--link-color);
+}
+/* xxxxx CUSTOM CLASSES */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 20;
+}
+#msger {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 20;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#whtsp {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  z-index: 20;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+/* HEADER */
+#header {
+  background-color: var(--theme-color);
+  color: white;
+  padding:5px;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+#header a{
+  text-decoration: none;
+  color: inherit;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+#header span {
+  font-size: 12px;
+}
+/*** HEADER ***/
+
+
+/* NAVBAR */
+.navbar-link:hover  {
+  background-color: var(--theme-color);
+  color: white !important;
+}
+
+#appoint-btn {
+  background-color: var(--theme-color);
+  transition: transform 1s;
+}
+
+#signin {
+  background: rgb(183, 3, 3);
+}
+
+#appoint-btn:hover{
+  background: #52a2c7;
+}
+#signin:hover{
+  background: rgba(183, 3, 3, 0.8);
+}
+
+
+
+/* CAROUSEL */
+#home .carousel-item:after {
+  content:"";
+  display:block;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.4);
+}
+#home .carousel-caption {
+  z-index: 20 !important;
+  position: absolute;
+  top: 50%;
+  color: white !important;
+}
+#home .carousel-indicators button {
+  height: 20px !important;
+  width: 20px !important;
+  border-radius: 100% !important;
+}
+
+
+.header-btn {
+  position: relative;
+  margin-top: -10px;
+  z-index: 10;
+}
+/* mini-column */
+#mini-column, .bg-blue {
+  background-color: var(--theme-color);
+}
+
+
+/* CARDS & SERVICES FOR HOME*/
+#services {
+  background-color: rgb(236, 235, 235);
+}
+
+.card {
+  border-bottom: 3px solid gray;
+}
+
+.card:hover {
+  background-color: rgb(250, 250, 250);
+  border-bottom: 3px solid var(--link-color);
+  border-color: var(--link-color);
+}
+.cust-card {
+  background-color: var(--theme-color);
+}
+
+footer {
+  background-color: var(--theme-color);
+}
+
+footer a:hover {
+  color: var(--link-color);
+}
+
+@media screen and (max-width:600px) {
+  #home .carousel-caption {
+      top: 30%;
   }
 }
