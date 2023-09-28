@@ -75,7 +75,7 @@ function Footer() {
                         <a className="d-block text-decoration-none text-white my-2"><i className="fas fa-home me-3"></i> Post Office Box # 49, Limbe</a>
                         <a className="d-block text-decoration-none text-white my-2"><i className="fas fa-envelope me-3"></i>info@example.com</a>
                         <a className="d-block text-decoration-none text-white my-2"><i className="fas fa-phone me-3"></i>+237 620 777 290 </a>
-                        <a a href="https://wa.me/+237671752479" className="d-block text-decoration-none text-white my-2"><i className="fab fa-whatsapp me-3"></i>+237 671 752 479 </a>
+                        <a href="https://wa.me/+237671752479" className="d-block text-decoration-none text-white my-2"><i className="fab fa-whatsapp me-3"></i>+237 671 752 479 </a>
                     </div>
                     {/* Grid column */}
                     </div>
@@ -90,7 +90,7 @@ function Footer() {
             </div>
             {/* Copyright */}
         </footer>
-        {/* Footer */}
+        Footer
     </> 
     );
 }

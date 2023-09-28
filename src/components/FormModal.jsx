@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { auth } from "../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+
 
 function FormModal() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const submitInfo = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      alert(`User ${user.uid} has been signed in with ${user.email}`);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`Sign-in attempt failed. Error Code: ${errorCode} || Error Message: ${errorMessage}`);
+    }
+  };
+  
+
   return (
     <>
       <div
@@ -32,6 +52,7 @@ function FormModal() {
                     className="form-control"
                     id="email"
                     placeholder="Enter your email"
+                    onChange={(e) => {setEmail(e.target.value)}}
                   />
                 </div>
                 <div className="my-3">
@@ -43,12 +64,14 @@ function FormModal() {
                     className="form-control"
                     id="password"
                     placeholder="Enter your password"
+                    onChange={(e) => {setPassword(e.target.value)}}
                   />
                 </div>
                 <div className="d-grid">
                   <button
                     type="submit"
                     className="btn btn-info text-white btn-lg bg-blue"
+                    onClick={submitInfo}
                   >
                     Sign In
                   </button>
