@@ -85,7 +85,7 @@ function Navbar() {
         </div>
       </nav>
       <Outlet />
-      <FormModal />
+      <FormModal text={true}/>
     </>
   );
 }

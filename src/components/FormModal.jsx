@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 
 
-function FormModal() {
+function FormModal(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const submitInfo = async () => {
+  const signIn = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -20,6 +20,18 @@ function FormModal() {
     }
   };
   
+  const signUp = async () => {
+    console.log("Loading ...")
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+    console.log("Successfull ...")
+
+    }catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`Sign-in attempt failed. Error Code: ${errorCode} || Error Message: ${errorMessage}`);
+    }
+  }
 
   return (
     <>
@@ -42,7 +54,8 @@ function FormModal() {
               ></button>
             </div>
             <div className="modal-body mx-3">
-              <form>
+              
+              {/* Sign in/up form */}
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label"><i className="fas fa-envelope me-2 text-secondary"></i>
                     Email address 
@@ -69,14 +82,12 @@ function FormModal() {
                 </div>
                 <div className="d-grid">
                   <button
-                    type="submit"
                     className="btn btn-info text-white btn-lg bg-blue"
-                    onClick={submitInfo}
+                    onClick={props.text ? signIn: signUp}
                   >
-                    Sign In
+                    {props.text ? "SIGN IN":"CREATE USER"}
                   </button>
                 </div>
-              </form>
             </div>
           </div>
         </div>
