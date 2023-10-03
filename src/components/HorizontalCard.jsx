@@ -16,6 +16,12 @@ function HorizontalCard(props) {
                     <h5 className="py-2 text-center">{props.title}</h5>
                     <p className="card-text pb-3">{props.description}</p>
                     <a href="#about" className="btn btn-outline-light border-2 d-block px-2 fw-bold">Make An Appointment</a>
+                    {props.isLoggedIn &&
+                            <div className="d-flex justify-content-between mt-4">
+                                <button className="btn btn-success">Edit</button>
+                                <button className="btn btn-danger">Delete</button>
+                            </div>
+                        }
                 </div>
             </div>
     )

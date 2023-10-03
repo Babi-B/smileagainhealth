@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 
 function FormModal(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const user = auth.currentUser;
+  const error = ""
+  
   const signIn = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      alert(`User ${user.uid} has been signed in with ${user.email}`);
+      await signInWithEmailAndPassword(auth, email, password);
+      setIsLoggedIn(true)
+      console.log("LOGGED IN")
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(`Sign-in attempt failed. Error Code: ${errorCode} || Error Message: ${errorMessage}`);
+      // return error = "Invalid Email or Password"
+      alert(`SIGN IN FAILED: ${errorMessage}`);
     }
   };
-  
-  const signUp = async () => {
-    console.log("Loading ...")
+
+  const createManager = async () => {
+    // console.log("Loading ...")
     try {
       await createUserWithEmailAndPassword(auth, email, password)
-    console.log("Successfull ...")
-
+    // console.log("Successfull ...")
     }catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(`Sign-in attempt failed. Error Code: ${errorCode} || Error Message: ${errorMessage}`);
+      alert(`SIGN UP FAILED : ${errorMessage}`);
     }
   }
 
@@ -45,7 +48,7 @@ function FormModal(props) {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <img src="logo.png" alt="" className="text-center modal-title" id="exampleModalLabel" height="50" />
+              <img src="logo.png" alt="" className="modal-title" id="exampleModalLabel" height="50" />
               <button
                 type="button"
                 className="btn-close"
@@ -53,8 +56,10 @@ function FormModal(props) {
                 aria-label="Close"
               ></button>
             </div>
+            <p className="text-info my-3 mx-4" >For Staff Only *</p>
+
             <div className="modal-body mx-3">
-              
+
               {/* Sign in/up form */}
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label"><i className="fas fa-envelope me-2 text-secondary"></i>
@@ -80,12 +85,13 @@ function FormModal(props) {
                     onChange={(e) => {setPassword(e.target.value)}}
                   />
                 </div>
+              <p className="text-danger" >{error}</p>
                 <div className="d-grid">
                   <button
                     className="btn btn-info text-white btn-lg bg-blue"
-                    onClick={props.text ? signIn: signUp}
+                    onClick={ isLoggedIn ? createManager:signIn}
                   >
-                    {props.text ? "SIGN IN":"CREATE USER"}
+                    { isLoggedIn ? "CREATE MANAGER":"SIGN IN"}
                   </button>
                 </div>
             </div>

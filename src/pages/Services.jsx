@@ -5,7 +5,7 @@ import HorizontalCard from "../components/HorizontalCard";
 import BabyPic from "../assets/pics/little_baby.jpg"
 import BabyIcon from "../assets/svg/baby.svg"
 
-function Services() {
+function Services(props) {
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
@@ -41,6 +41,7 @@ function Services() {
                         imgIcon={BabyIcon}
                         title="Pedriatic Care "
                         description="Some quick example text to build on the card title and make up the bulk of the card's content."
+                        isLoggedIn={props.isLoggedIn}
                     />
                 </div>
             </section>

@@ -4,7 +4,9 @@ import Header from "./Header";
 import ContactIcons from "./ContactIcons";
 import FormModal from "./FormModal";
 
-function Navbar() {
+function Navbar(props) {
+  
+  
   return (
     <>
       <ContactIcons />
@@ -33,7 +35,7 @@ function Navbar() {
           >
             <ul className="navbar-nav fw-bold">
               <li className="nav-item">
-                <Link to="/" className="nav-link navbar-link blue-text">
+                <Link to="/" className="nav-link navbar-link">
                   HOME
                 </Link>
               </li>
@@ -58,6 +60,14 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item d-md-none">
+              { props.isLoggedIn ? 
+                <Link
+                  className="nav-link navbar-link"
+                  onClick={props.logout}
+                >
+                  SIGN OUT
+                </Link>
+                  :
                 <Link
                   className="nav-link navbar-link"
                   data-bs-toggle="modal"
@@ -65,6 +75,7 @@ function Navbar() {
                 >
                   SIGN IN
                 </Link>
+                }
               </li>
               <li className="nav-item ms-2 d-none d-md-inline px-1 rounded" id="appoint-btn">
                 <Link to="/appointment" className="nav-link text-white">
@@ -72,6 +83,14 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item ms-2 d-none d-md-inline px-2 rounded" id="signin">
+              { props.isLoggedIn ? 
+                <Link
+                  className="nav-link text-white"
+                  onClick={props.logout}
+                >
+                  SIGN OUT
+                </Link>
+                :
                 <Link
                   className="nav-link text-white"
                   data-bs-toggle="modal"
@@ -79,13 +98,15 @@ function Navbar() {
                 >
                   SIGN IN
                 </Link>
+              }
+
               </li>
             </ul>
           </div>
         </div>
       </nav>
       <Outlet />
-      <FormModal text={true}/>
+      <FormModal />
     </>
   );
 }
