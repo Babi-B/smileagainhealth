@@ -2,36 +2,25 @@ import React, { useState, useEffect } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import FormModal from "../components/FormModal";
 import { db } from "../firebase/config";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import "../About.css";
 
-function AllServices() {
-  const [services, setServices] = useState([]);
+function AllServices(props) {
+  const [services, setServices] = useState(props.services);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [forEdit, setForEdit] = useState(false)
+  const [refresh, setRefresh] = useState(false)
+
+  const serviceCollectionRef = collection(db, "services");
+  
+  
   const [seriveList, setServiceList] = useState("")
   const [newSeriveImage, setNewServiceImage] = useState("")
   const [newSeriveName, setNewServiceName] = useState("")
   const [newSeriveDescription, setNewServiceDescription] = useState("")
 
-  const serviceCollectionRef = collection(db, "services");
-
-  useEffect(() => {
-    const getServiceList = async () => {
-      try {
-        const data = await getDocs(serviceCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setServices(filteredData);
-      } catch (error) {
-        console.error(`COULD NOT FETCH DATA. Error Message: ${error}`);
-      }
-    };
-
-    getServiceList();
-    window.scrollTo(0, 0);
-  }, []);
-
+  // ADD A SERVICE
   const addService = async (service) => {
     try {
       const docRef = await addDoc(serviceCollectionRef, service);
@@ -40,10 +29,52 @@ function AllServices() {
         id: docRef.id,
       };
       setServices([...services, newService]);
+      setRefresh(true)
+      console.log("SERVICE ADDED")
     } catch (error) {
       console.error(`COULD NOT ADD SERVICE. Error Message: ${error}`);
     }
   };
+
+  // EDIT A SERVICE
+  const editService = async (serviceId, updatedService) => {
+    try {
+      // Update the service in Firebase Firestore
+      await updateDoc(doc(db, "services", serviceId), updatedService);
+      // Update the services state with the updated service
+      setServices((prevServices) =>
+        prevServices.map((service) =>
+          service.id === serviceId ? { ...service, ...updatedService } : service
+        )
+      );
+      setRefresh(true)
+      console.log("Service updated");
+    } catch (error) {
+      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
+      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
+    }
+  };
+
+  // DELETE A SERVICE
+  const deleteService = async (serviceId) => {
+    try {
+      // Delete the service from Firebase Firestore
+      await deleteDoc(doc(db, "services", serviceId));
+      // Update the services state by removing the deleted service
+      setServices((prevServices) =>
+        prevServices.filter((service) => service.id !== serviceId)
+      );
+      console.log("Service deleted");
+    } catch (error) {
+      console.error(`COULD NOT DELETE SERVICE: ${error.message}`);
+      alert(`COULD NOT DELETE SERVICE: ${error.message}`);
+    }
+  };
+  
+  // const handleEditService = (serviceName, serviceDescription) => {
+  //   setSelectedServiceName(serviceName);
+  //   setSelectedServiceDescription(serviceDescription);
+  // };
 
   return (
     <>
@@ -60,7 +91,7 @@ function AllServices() {
               ADD SERVICE
             </button>
           </div>
-          {services.length === 0 ? (
+          {props.services.length === 0 ? (
             <p className="fst-italic lead mb-4 text-center">
               No Manager Has Been Registered
             </p>
@@ -75,16 +106,28 @@ function AllServices() {
                 </tr>
               </thead>
               <tbody>
-                {services.map((service, index) => (
+                {props.services.map((service, index) => (
                   <tr key={service.id}>
                     <th scope="row">{index + 1}</th>
                     <td>{service.name}</td>
                     <td>{service.description}</td>
                     <td className="btn">
-                      <i className="fas fa-trash text-danger"></i>
+                      <i 
+                        className="fas fa-trash text-danger"
+                        onClick={() => deleteService(service.id)}
+                      ></i>
                     </td>
                     <td className="btn">
-                      <i className="fas fa-edit text-success"></i>
+                      <i 
+                        className="fas fa-edit text-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        onClick={() => {
+                          setSelectedService(service);
+                          setIsEditModalOpen(true);
+                          setForEdit(true)
+                        }}
+                      ></i>
                     </td>
                   </tr>
                 ))}
@@ -93,9 +136,15 @@ function AllServices() {
           )}
         </div>
       </section>
-      <FormModal 
-        taskID={3} 
-        addService={addService} 
+        <FormModal 
+          taskID={3} 
+          addService={addService} 
+          editService={editService}
+          service={selectedService}
+          forEdit={forEdit}
+          closeModal={() => setIsEditModalOpen(false)}
+          setEditFalse={() => setForEdit(false)}
+          refresh={refresh}
         />
     </>
   );

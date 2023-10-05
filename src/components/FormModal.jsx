@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import Logo from "../assets/pics/logo.png"
@@ -10,6 +10,22 @@ function FormModal(props) {
   const [password, setPassword] = useState("");
 
   const error = "";
+
+  console.log(`SERVICE NAME ${props.taskID}`)
+
+  useEffect(() => {
+    if (props.service && props.service.name) {
+      setName(props.service.name);
+    } else {
+      setName("");
+    }
+  
+    if (props.service && props.service.description) {
+      setDescription(props.service.description);
+    } else {
+      setDescription("");
+    }
+  }, [props.service]);
 
   const signIn = async () => {
     try {
@@ -43,6 +59,19 @@ function FormModal(props) {
     } catch (error) {
       console.error(`COULD NOT CREATE SERVICE : ${error.message}`);
       alert(`COULD NOT CREATE SERVICE : ${error.message}`);
+    }
+  };
+
+  const updateService = async () => {
+    try {
+      // Update the service data in Firebase Firestore
+      await props.editService(props.service.id, { name, description });
+      console.log("Service updated");
+      props.closeModal();
+      props.setEditFalse();
+    } catch (error) {
+      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
+      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
     }
   };
 
@@ -93,6 +122,7 @@ function FormModal(props) {
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
+                    required
                     />
                   </div>
                   <div className="my-3">
@@ -108,6 +138,7 @@ function FormModal(props) {
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
+                      required
                     />
                   </div>
                 </>
@@ -127,12 +158,13 @@ function FormModal(props) {
                       id="name"
                       placeholder="Enter the name"
                       onChange= {(e) => {setName(e.target.value);}}
+                      required
                     />
                   </div>
                 </>
                 }
 
-                {/* CREATE SERVICE */}
+                {/* CREATE AND EDIT SERVICE */}
                 {props.taskID === 3 &&
                 <>
                   <div className="mb-3">
@@ -145,8 +177,10 @@ function FormModal(props) {
                     className="form-control"
                     id="name"
                     placeholder="Enter the name"
+                    value={name}
                     onChange= {(e) => {setName(e.target.value);}}
-                    />
+                    required
+                  />
                   </div>
                     <div className="my-3">
                     <label htmlFor="password" className="form-label">
@@ -158,7 +192,9 @@ function FormModal(props) {
                       className="form-control"
                       id="description"
                       placeholder="Enter description"
+                      value={description}
                       onChange={(e) => {setDescription(e.target.value)}}
+                      required
                     />
                   </div>
                 </>
@@ -167,9 +203,16 @@ function FormModal(props) {
               <div className="d-grid">
                 <button
                   className="btn btn-info text-white btn-lg bg-blue"
-                  onClick={props.taskID === 1 ? signIn : props.taskID === 2 ? createManager:createService}
+                  onClick={props.taskID === 1 ? 
+                    signIn : props.taskID === 2 ?
+                    createManager: props.taskID === 3 && props.forEdit ? 
+                    updateService:createService}
                 >
-                  {props.taskID === 1 ? "SIGN IN" : props.taskID === 2 ? "CREATE MANAGER":"CREATE SERVICE" }
+                  {props.taskID === 1 ? 
+                  "SIGN IN" : props.taskID === 2 ? 
+                  "CREATE MANAGER": props.taskID === 3 && props.forEdit ? 
+                  "UPDATE SERVICE":  props.taskID === 3 ?
+                  "CREATE SERVICE": "ADD STAFF" }
                 </button>
               </div>
               </div>
