@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import Header from "./Header";
 import ContactIcons from "./ContactIcons";
 import FormModal from "./FormModal";
+import Logo from "../assets/pics/logo.png"
 
 function Navbar(props) {
   
@@ -14,7 +15,7 @@ function Navbar(props) {
       <nav className="navbar navbar-expand-md navbar-light sticky-top bg-white">
         <div className="container-lg">
           <Link to="/" className="navbar-brand">
-            <img src="logo.png" alt="logo" id="logo" height="60" width="60" />
+            <img src={Logo} alt="logo" id="logo" height="60" width="60" />
           </Link>
           <button
             className="navbar-toggler"
@@ -54,6 +55,25 @@ function Navbar(props) {
                   CONTACT
                 </Link>
               </li>
+              { props.isLoggedIn && 
+                <li className="nav-item dropdown">
+                <Link className="nav-link dropdown-toggle"
+                    to="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                  DASHBOARD
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {/* <Link className="dropdown-item" to="/dashboard/managers">All Managers</Link> */}
+                  <Link className="dropdown-item" to="/dashboard/staff">All Staff</Link>
+                  <Link className="dropdown-item" to="/dashboard/services">All Services</Link>
+                  <Link className="dropdown-item" to="/dashboard/events">All Events</Link>
+                </div>
+              </li>
+              }
               <li className="nav-item d-md-none">
                 <Link to="/appointment" className="nav-link navbar-link">
                   APPOINTMENT
@@ -106,7 +126,7 @@ function Navbar(props) {
         </div>
       </nav>
       <Outlet />
-      <FormModal />
+      <FormModal taskID={1}/>
     </>
   );
 }

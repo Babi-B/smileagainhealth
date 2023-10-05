@@ -4,35 +4,10 @@ import GroupPic from "../assets/pics/group.jpg"
 import Card from "../components/Card";
 import FemaleDoc from "../assets/pics/female_doc.png"
 import Timetable from "../components/Timetable";
-import { db } from "../firebase/config";
-import { getDocs, collection } from "firebase/firestore";
 import "../About.css"
 
 
 function About(props) {
-    const [staff, setStaff] = useState([])
-    const staffCollectionRef = collection(db, "staff")
-    useEffect(() => {
-        const getStaffList = async () => {
-            // READ THE DATA
-            // SET THE LIST
-            try{
-                const data = await getDocs(staffCollectionRef);
-                const filteredData = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id:doc.id
-                }));
-                console.log(filteredData)
-                setStaff(filteredData)
-            }catch(error){
-                console.error(`COULD NOT FETCH DATA. Error Msge ${error}`)
-            }
-        }
-        getStaffList();
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-      }, []);
     return(
         <>
             <MiniNavbar location="About Us" location_url="/about_us"/>
@@ -65,14 +40,14 @@ function About(props) {
                     <div className="custom-hr mb-5"></div>
                     <div className="row justify-content-center g-4 text-center"></div>
                     {
-                        staff.map((staff) => (
+                        props.staff.map((staff) => (
                             <Card 
                                 img={FemaleDoc} 
                                 title={staff.name}
                                 subtitle={staff.position}
                                 description={staff.description}
                                 noDisplay="d-none"
-                                isLoggedIn={props.isLoggedIn}
+                                key={staff.id}
                             />
                     ))
                     }

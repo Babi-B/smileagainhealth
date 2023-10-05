@@ -85,7 +85,7 @@ function Contact() {
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="email" className="d-none">Email phone</label>
-                        <input type="email" className="form-control" id="email" placeholder="Your phone" />
+                        <input type="email" className="form-control" id="phone" placeholder="Your phone" />
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="msge" className="d-none">Message</label>

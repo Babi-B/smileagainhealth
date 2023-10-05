@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-
-
+import Logo from "../assets/pics/logo.png"
 
 function FormModal(props) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const user = auth.currentUser;
-  const error = ""
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [password, setPassword] = useState("");
+
+  const error = "";
+
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setIsLoggedIn(true)
-      console.log("LOGGED IN")
+      setIsLoggedIn(true);
+      console.log("LOGGED IN");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -24,17 +24,35 @@ function FormModal(props) {
     }
   };
 
-  const createManager = async () => {
-    // console.log("Loading ...")
+  // const createManager = async () => {
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password, { name });
+  //     console.log("User Created")
+  //   } catch (error) {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     alert(`SIGN UP FAILED : ${errorMessage}`);
+  //   }
+  // };
+
+  const createService = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-    // console.log("Successfull ...")
-    }catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(`SIGN UP FAILED : ${errorMessage}`);
+      // Save the service data to Firebase Firestore
+      await props.addService({ name, description });
+      console.log("Service Created");
+    } catch (error) {
+      console.error(`COULD NOT CREATE SERVICE : ${error.message}`);
+      alert(`COULD NOT CREATE SERVICE : ${error.message}`);
     }
-  }
+  };
+
+  // TASK ID 1 --> SIGN IN
+  // TASK ID 2 --> CREATE MANAGER
+  // TASK ID 3 --> CREATE SERVICE
+  // TASK ID 4 --> CREATE STAFF
+  // TASK ID 5 --> CREATE EVENT
+
+
 
   return (
     <>
@@ -44,11 +62,11 @@ function FormModal(props) {
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
-      >
+        >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <img src="logo.png" alt="" className="modal-title" id="exampleModalLabel" height="50" />
+              <img src={Logo} alt="" className="modal-title" id="exampleModalLabel" height="50" />
               <button
                 type="button"
                 className="btn-close"
@@ -56,48 +74,109 @@ function FormModal(props) {
                 aria-label="Close"
               ></button>
             </div>
-            <p className="text-info my-3 mx-4" >For Staff Only *</p>
-
             <div className="modal-body mx-3">
 
-              {/* Sign in/up form */}
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label"><i className="fas fa-envelope me-2 text-secondary"></i>
-                    Email address 
+              {/* SIGN IN */}
+              {props.taskID === 1 && 
+              <>
+                <p className="text-info my-3 mx-4">For Staff Only *</p>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      <i className="fas fa-envelope me-2 text-secondary"></i>
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter your email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="my-3">
+                    <label htmlFor="password" className="form-label">
+                      <i className="fas fa-lock me-2 text-secondary"></i>
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                </>
+                }
+
+                {/* CREATE MANAGER */}
+                {props.taskID === 2 &&
+                <>
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                      <i className="fas fa-user me-2 text-secondary"></i>
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      placeholder="Enter the name"
+                      onChange= {(e) => {setName(e.target.value);}}
+                    />
+                  </div>
+                </>
+                }
+
+                {/* CREATE SERVICE */}
+                {props.taskID === 3 &&
+                <>
+                  <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    <i className="fas fa-user me-2 text-secondary"></i>
+                    Name
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
-                    id="email"
-                    placeholder="Enter your email"
-                    onChange={(e) => {setEmail(e.target.value)}}
-                  />
-                </div>
-                <div className="my-3">
-                  <label htmlFor="password" className="form-label"><i className="fas fa-lock me-2 text-secondary"></i>
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter your password"
-                    onChange={(e) => {setPassword(e.target.value)}}
-                  />
-                </div>
-              <p className="text-danger" >{error}</p>
-                <div className="d-grid">
-                  <button
-                    className="btn btn-info text-white btn-lg bg-blue"
-                    onClick={ isLoggedIn ? createManager:signIn}
-                  >
-                    { isLoggedIn ? "CREATE MANAGER":"SIGN IN"}
-                  </button>
-                </div>
-            </div>
+                    id="name"
+                    placeholder="Enter the name"
+                    onChange= {(e) => {setName(e.target.value);}}
+                    />
+                  </div>
+                    <div className="my-3">
+                    <label htmlFor="password" className="form-label">
+                      <i className="fas fa-lock me-2 text-secondary"></i>
+                      Description
+                    </label>
+                    <textarea
+                      type="textarea"
+                      className="form-control"
+                      id="description"
+                      placeholder="Enter description"
+                      onChange={(e) => {setDescription(e.target.value)}}
+                    />
+                  </div>
+                </>
+                }
+              <p className="text-danger">{error}</p>
+              <div className="d-grid">
+                <button
+                  className="btn btn-info text-white btn-lg bg-blue"
+                  onClick={props.taskID === 1 ? signIn : props.taskID === 2 ? createManager:createService}
+                >
+                  {props.taskID === 1 ? "SIGN IN" : props.taskID === 2 ? "CREATE MANAGER":"CREATE SERVICE" }
+                </button>
+              </div>
+              </div>
+              </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }
