@@ -6,7 +6,7 @@ import Injecting from "../assets/pics/injecting.jpg"
 import AvailableDoctor from "../assets/pics/doctor_is_available.jpg"
 
 
-function Home() {
+function Home(props) {
     const styles = {
         width: {
             width: '18rem'
@@ -16,6 +16,8 @@ function Home() {
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
+
+    const services = props.services.slice(0, 4);
     return (
         <>
             <section id="section1">
@@ -103,26 +105,16 @@ function Home() {
                     <h3 className="blue-text ">Some of the services we offer include</h3>
                     <div className="custom-hr mb-5"></div>
                     <div className="row justify-content-center align-items-center g-4">
-                        <Card 
+                        {services.map((service,index) =>(
+                            <Card 
+                            key={index}
                             img={Injecting} 
-                            title="Vaccination"
-                            description="Some quick example text to build on the card title and make up the bulk of the card's content."
+                            title={service.name}
+                            description={service.description.length > 100
+                                ? `${service.description.substring(0, 100)}...`
+                                : service.description}
                             />
-                        <Card 
-                            img={Injecting} 
-                            title="Vaccination"
-                            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-                            />
-                        <Card 
-                            img={Injecting} 
-                            title="Vaccination"
-                            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-                            />
-                        <Card 
-                            img={Injecting} 
-                            title="Vaccination"
-                            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-                            />
+                        ))}    
                     </div>
                 </div>
             </section>

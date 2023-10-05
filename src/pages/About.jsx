@@ -8,6 +8,9 @@ import "../About.css"
 
 
 function About(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     return(
         <>
             <MiniNavbar location="About Us" location_url="/about_us"/>

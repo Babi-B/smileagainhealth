@@ -8,6 +8,7 @@ function FormModal(props) {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
+  const [fileUpload, setFileUpload] = useState(null)
 
   const error = "";
 
@@ -27,10 +28,20 @@ function FormModal(props) {
     }
   }, [props.service]);
 
+  // CLEAR INPUT VALUES
+  const clearValues = () => {
+      setName("")
+      setPassword("")
+      setEmail("")
+      setDescription("")
+      setFileUpload(null)
+  }
+
+  // SIGN IN
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setIsLoggedIn(true);
+      clearValues();
       console.log("LOGGED IN");
     } catch (error) {
       const errorCode = error.code;
@@ -54,8 +65,10 @@ function FormModal(props) {
   const createService = async () => {
     try {
       // Save the service data to Firebase Firestore
-      await props.addService({ name, description });
+      await props.addService({ name, description }, fileUpload);
       console.log("Service Created");
+      clearValues();
+      props.refreshApp()
     } catch (error) {
       console.error(`COULD NOT CREATE SERVICE : ${error.message}`);
       alert(`COULD NOT CREATE SERVICE : ${error.message}`);
@@ -67,8 +80,9 @@ function FormModal(props) {
       // Update the service data in Firebase Firestore
       await props.editService(props.service.id, { name, description });
       console.log("Service updated");
-      props.closeModal();
       props.setEditFalse();
+      clearValues();
+      props.refreshApp();
     } catch (error) {
       console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
@@ -101,6 +115,7 @@ function FormModal(props) {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={clearValues}
               ></button>
             </div>
             <div className="modal-body mx-3">
@@ -167,6 +182,14 @@ function FormModal(props) {
                 {/* CREATE AND EDIT SERVICE */}
                 {props.taskID === 3 &&
                 <>
+                  <input 
+                    type="file" 
+                    id="img"
+                    className="mb-3" 
+                    onChange= {(e) => {setFileUpload(e.target.files[0]);}}
+                    accept="image/png, image/jpg, image/jpeg"
+                    required 
+                    />
                   <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     <i className="fas fa-user me-2 text-secondary"></i>
@@ -219,7 +242,6 @@ function FormModal(props) {
               </div>
           </div>
         </div>
-      {/* </div> */}
     </>
   );
 }

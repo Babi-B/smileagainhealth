@@ -34,15 +34,18 @@ function Services(props) {
                 <div className="container-lg py-5">
                     <h3 className="blue-text ">Some Of Our Services Include</h3>
                     <div className="custom-hr mb-5"></div>
-                    <HorizontalCard 
-                        img={BabyPic}
+                    {props.services.map((service, index) => (
+                        <HorizontalCard 
+                        key={service.id}
+                        img={service.imageUrl}
                         icon1=""
                         icon2=""
                         imgIcon={BabyIcon}
-                        title="Pedriatic Care "
-                        description="Some quick example text to build on the card title and make up the bulk of the card's content."
-                        isLoggedIn={props.isLoggedIn}
+                        title={service.name}
+                        description={service.description}
                     />
+                    ))}
+                    
                 </div>
             </section>
             <section className="bg-blue text-white text-center" >

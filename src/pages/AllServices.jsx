@@ -1,35 +1,44 @@
 import React, { useState, useEffect } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import FormModal from "../components/FormModal";
-import { db } from "../firebase/config";
-import { getDocs, collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { db, storage } from "../firebase/config";
+import { collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import "../About.css";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function AllServices(props) {
   const [services, setServices] = useState(props.services);
   const [selectedService, setSelectedService] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [forEdit, setForEdit] = useState(false)
-  const [refresh, setRefresh] = useState(false)
 
   const serviceCollectionRef = collection(db, "services");
   
-  
-  const [seriveList, setServiceList] = useState("")
-  const [newSeriveImage, setNewServiceImage] = useState("")
-  const [newSeriveName, setNewServiceName] = useState("")
-  const [newSeriveDescription, setNewServiceDescription] = useState("")
+  useEffect(() => {
+    setServices(props.services);
+  }, [props.services]);
 
   // ADD A SERVICE
-  const addService = async (service) => {
+  const addService = async (service, fileUpload) => {
     try {
-      const docRef = await addDoc(serviceCollectionRef, service);
+      // Upload the image to Firebase Storage
+      const storageRef = ref(storage, 'service-images/' + fileUpload.name);
+      const snapshot = await uploadBytes(storageRef, fileUpload);
+
+      // Get the download URL of the uploaded image
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      const docRef = await addDoc(serviceCollectionRef, {
+        ...service,
+        imageUrl: downloadURL, // Save the image URL in the Firestore document
+      });
+
       const newService = {
         ...service,
-        id: docRef.id,
+        id: docRef.id, 
+        imageUrl: downloadURL, // Include the image URL in the new service object
       };
+
       setServices([...services, newService]);
-      setRefresh(true)
       console.log("SERVICE ADDED")
     } catch (error) {
       console.error(`COULD NOT ADD SERVICE. Error Message: ${error}`);
@@ -47,7 +56,6 @@ function AllServices(props) {
           service.id === serviceId ? { ...service, ...updatedService } : service
         )
       );
-      setRefresh(true)
       console.log("Service updated");
     } catch (error) {
       console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
@@ -65,20 +73,16 @@ function AllServices(props) {
         prevServices.filter((service) => service.id !== serviceId)
       );
       console.log("Service deleted");
+      props.refreshApp()
     } catch (error) {
       console.error(`COULD NOT DELETE SERVICE: ${error.message}`);
       alert(`COULD NOT DELETE SERVICE: ${error.message}`);
     }
   };
-  
-  // const handleEditService = (serviceName, serviceDescription) => {
-  //   setSelectedServiceName(serviceName);
-  //   setSelectedServiceDescription(serviceDescription);
-  // };
 
   return (
     <>
-      <MiniNavbar location="Dashboard/Staff" location_url="/dashboard/staff" />
+      <MiniNavbar location="Dashboard/Services" location_url="/dashboard/services" />
       <section id="team">
         <div className="container-lg py-5">
           <div className="d-flex justify-content-between flex-wrap mb-5">
@@ -100,8 +104,8 @@ function AllServices(props) {
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Description</th>
+                  <th scope="col" className="text-wrap">Name</th>
+                  <th scope="col" className="">Description</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -124,7 +128,6 @@ function AllServices(props) {
                         data-bs-target="#exampleModal"
                         onClick={() => {
                           setSelectedService(service);
-                          setIsEditModalOpen(true);
                           setForEdit(true)
                         }}
                       ></i>
@@ -142,9 +145,8 @@ function AllServices(props) {
           editService={editService}
           service={selectedService}
           forEdit={forEdit}
-          closeModal={() => setIsEditModalOpen(false)}
           setEditFalse={() => setForEdit(false)}
-          refresh={refresh}
+          refreshApp={props.refreshApp}
         />
     </>
   );

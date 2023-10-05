@@ -90,7 +90,6 @@ function Footer() {
             </div>
             {/* Copyright */}
         </footer>
-        Footer
     </> 
     );
 }

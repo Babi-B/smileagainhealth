@@ -27,6 +27,10 @@ function App() {
   const serviceCollectionRef = collection(db, "services");
 
 
+  const refreshApp = () => {
+    setRefresh((prevRef) => !prevRef)
+  }
+
   // FETCH ALL STAFF
   useEffect(() => {
     const getStaffList = async () => {
@@ -45,7 +49,7 @@ function App() {
 
     getStaffList();
     window.scrollTo(0, 0);
-  }, [refresh]);
+  }, []);
 
   // FETCH ALL SERVICES
   useEffect(() => {
@@ -66,14 +70,13 @@ function App() {
   window.scrollTo(0, 0);
 }, [refresh]);
 
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
     });
 
     return () => unsubscribe();
-  }, [refresh]);
+  }, []);
 
   const logout = async () => {
     try {
@@ -93,16 +96,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} />}>
-            <Route index element={<Home />} />
-            <Route path="/services" element={<Services isLoggedIn={isLoggedIn} refresh={refresh} setRefresh={setRefresh} />} />
-            <Route path="/about_us" element={<About staff={staff} refresh={refresh} setRefresh={setRefresh} />} />
+            <Route index element={<Home services={services} />} />
+            <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
+            <Route path="/about_us" element={<About staff={staff}  />} />
             <Route path="/contact" element={<Contact />} />
 
             { isLoggedIn ?
               <>
-                <Route path="/dashboard/staff" element={<Staff staff={staff} refresh={refresh} setRefresh={setRefresh}/>} /> 
-                <Route path="/dashboard/services" element={<AllServices services={services} refresh={refresh} setRefresh={setRefresh} />} /> 
-                <Route path="/dashboard/events" element={<Events staff={staff} refresh={refresh} setRefresh={setRefresh}/>} /> 
+                <Route path="/dashboard/staff" element={<Staff staff={staff} />} /> 
+                <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
+                <Route path="/dashboard/events" element={<Events staff={staff} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />
