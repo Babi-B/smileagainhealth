@@ -7,12 +7,16 @@ function FormModal(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [place, setPlace] = useState("");
+
   const [password, setPassword] = useState("");
   const [fileUpload, setFileUpload] = useState(null)
 
   const error = "";
 
-  console.log(`SERVICE NAME ${props.taskID}`)
+  console.log(`FORM TASK ID ${props.taskID}`)
 
   useEffect(() => {
     if (props.service && props.service.name) {
@@ -39,6 +43,9 @@ function FormModal(props) {
       setPassword("")
       setEmail("")
       setDescription("")
+      setPlace("")
+      setDate("")
+      setTime("")
       setFileUpload(null)
   }
 
@@ -67,8 +74,8 @@ function FormModal(props) {
   //   }
   // };
 
+  // FOR SERVICES ** TASK ID: 3
   const createService = async () => {
-    console.log(`File to be edited ${fileUpload}`)
     try {
       // Save the service data to Firebase Firestore
       await props.addService({ name, description }, fileUpload);
@@ -94,6 +101,65 @@ function FormModal(props) {
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
     }
   };
+
+  // FOR STAFF ** TASK ID: 4
+  const createStaff = async () => {
+    console.log(`Creating Staff...`)
+    try {
+      // Save the service data to Firebase Firestore
+      await props.addStaff({ name, description }, fileUpload);
+      console.log("Staff Created");
+      clearValues();
+      props.refreshApp()
+    } catch (error) {
+      console.error(`COULD NOT CREATE STAFF : ${error.message}`);
+      alert(`COULD NOT CREATE STAFF : ${error.message}`);
+    }
+  };
+
+  const updateStaff = async () => {
+    try {
+      // Update the service data in Firebase Firestore
+      await props.editStaff(props.staff.id, { name, description }, fileUpload);
+      console.log("STAFF updated");
+      props.setEditFalse();
+      clearValues();
+      props.refreshApp();
+    } catch (error) {
+      console.error(`COULD NOT UPDATE STAFF: ${error.message}`);
+      alert(`COULD NOT UPDATE STAFF: ${error.message}`);
+    }
+  };
+
+  // FOR EVENT ** TASK ID: 5
+  const createEvent = async () => {
+    console.log(`Creating Event...`)
+    try {
+      // Save the event data to Firebase Firestore
+      await props.addEvent({ name, description, place, time, date }, fileUpload);
+      console.log("Event Created");
+      clearValues();
+      props.refreshApp()
+    } catch (error) {
+      console.error(`COULD NOT CREATE EVENT : ${error.message}`);
+      alert(`COULD NOT CREATE EVENT : ${error.message}`);
+    }
+  };
+
+  const updateEvent = async () => {
+    try {
+      // Update the event data in Firebase Firestore
+      await props.editEvent(props.event.id, { name, description, place, time, date }, fileUpload);
+      console.log("Event updated");
+      props.setEditFalse();
+      clearValues();
+      props.refreshApp();
+    } catch (error) {
+      console.error(`COULD NOT UPDATE EVENT: ${error.message}`);
+      alert(`COULD NOT UPDATE EVENT: ${error.message}`);
+    }
+  };
+
 
   // TASK ID 1 --> SIGN IN
   // TASK ID 2 --> CREATE MANAGER
@@ -185,8 +251,8 @@ function FormModal(props) {
                 </>
                 }
 
-                {/* CREATE AND EDIT SERVICE */}
-                {props.taskID === 3 &&
+                {/* CREATE AND EDIT SERVICE AND STAFF */}
+                {props.taskID === 3 || props.taskID === 4 ?
                 <>
                   <input 
                     type="file" 
@@ -212,8 +278,8 @@ function FormModal(props) {
                   />
                   </div>
                     <div className="my-3">
-                    <label htmlFor="password" className="form-label">
-                      <i className="fas fa-lock me-2 text-secondary"></i>
+                    <label htmlFor="description" className="form-label">
+                    <i className="fas fa-info-circle me-2 text-secondary"></i>
                       Description
                     </label>
                     <textarea
@@ -226,8 +292,96 @@ function FormModal(props) {
                       required
                     />
                   </div>
-                </>
+                </> : 
+                
+                <>
+                {/* CREATE AND EDIT EVENTS */}
+                <input 
+                  type="file" 
+                  id="img"
+                  className="mb-3" 
+                  onChange={(e) => {setFileUpload(e.target.files[0]);}}
+                  accept="image/png, image/jpg, image/jpeg"
+                  required 
+                />
+
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    <i className="fas fa-user me-2 text-secondary"></i>
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="Enter the name"
+                    value={name}
+                    onChange={(e) => {setName(e.target.value);}}
+                    required
+                />
+                </div>
+
+                <div className="my-3">
+                  <label htmlFor="description" className="form-label">
+                    <i className="fas fa-info-circle me-2 text-secondary"></i>
+                    Description
+                  </label>
+                  <textarea
+                    type="textarea"
+                    className="form-control"
+                    id="description"
+                    placeholder="Enter description"
+                    value={description}
+                    onChange={(e) => {setDescription(e.target.value)}}
+                    required
+                  />
+                </div>
+
+                <div className="my-3">
+                  <label htmlFor="date" className="form-label"><i className="far fa-calendar-alt me-2 text-secondary"></i>
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="date"
+                    value={date}
+                    onChange={(e) => {setDate(e.target.value)}}
+                    required
+                  />
+                </div>
+
+                <div className="my-3">
+                  <label htmlFor="time" className="form-label"><i className="fas fa-solid fa-clock me-2 text-secondary"></i>
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    className="form-control"
+                    id="time"
+                    value={time}
+                    onChange={(e) => {setTime(e.target.value)}}
+                    required
+                  />
+                </div>
+                <div className="my-3">
+                  <label htmlFor="place" className="form-label">
+                  <i className="fas fa-map-marker-alt me-2 text-secondary"></i>
+                    Place
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="place"
+                    value={place}
+                    onChange={(e) => {setPlace(e.target.value)}}
+                    required
+                  />
+                </div>
+              </>
                 }
+                
+
               <p className="text-danger">{error}</p>
               <div className="d-grid">
                 <button
@@ -235,13 +389,21 @@ function FormModal(props) {
                   onClick={props.taskID === 1 ? 
                     signIn : props.taskID === 2 ?
                     createManager: props.taskID === 3 && props.forEdit ? 
-                    updateService:createService}
+                    updateService: props.taskID === 3 ?
+                    createService: props.taskID === 4 && props.forEdit ?
+                    updateStaff: props.taskID === 4 ?
+                    createStaff: props.taskID === 5 && props.forEdit ?
+                    updateEvent: createEvent
+                  }
                 >
                   {props.taskID === 1 ? 
                   "SIGN IN" : props.taskID === 2 ? 
                   "CREATE MANAGER": props.taskID === 3 && props.forEdit ? 
                   "UPDATE SERVICE":  props.taskID === 3 ?
-                  "CREATE SERVICE": "ADD STAFF" }
+                  "CREATE SERVICE": props.taskID === 4 && props.forEdit ?
+                  "UPDATE STAFF": props.taskID === 4 ?
+                  "ADD STAFF": props.taskID === 5 && props.forEdit ?
+                  "UPDATE EVENT":"ADD EVENT" }
                 </button>
               </div>
               </div>

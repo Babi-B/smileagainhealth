@@ -45,7 +45,7 @@ function About(props) {
                     {
                         props.staff.map((staff) => (
                             <Card 
-                                img={FemaleDoc} 
+                                img={staff.imageUrl} 
                                 title={staff.name}
                                 subtitle={staff.position}
                                 description={staff.description}

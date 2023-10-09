@@ -20,11 +20,13 @@ function App() {
 
   const [staff, setStaff] = useState([]);
   const [services, setServices] = useState([]);
+  const [events, setEvents] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   const staffCollectionRef = collection(db, 'staff');
   const serviceCollectionRef = collection(db, "services");
+  const eventCollectionRef = collection(db, "events");
 
 
   const refreshApp = () => {
@@ -43,7 +45,7 @@ function App() {
         console.log(filteredData);
         setStaff(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH DATA. Error Message: ${error}`);
+        console.error(`COULD NOT FETCH STAFF DATA. Error Message: ${error}`);
       }
     };
 
@@ -62,13 +64,32 @@ function App() {
         }));
         setServices(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH DATA. Error Message: ${error}`);
+        console.error(`COULD NOT FETCH SERVICES DATA. Error Message: ${error}`);
       }
     };
 
-  getServiceList();
+    getServiceList();
+    window.scrollTo(0, 0);
+  }, [refresh]);
+
+  // FETCH ALL EVENTS
+  useEffect(() => {
+    const getEventList = async () => {
+      try {
+        const data = await getDocs(eventCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setEvents(filteredData);
+      } catch (error) {
+        console.error(`COULD NOT FETCH EVENTS DATA. Error Message: ${error}`);
+      }
+    };
+
+  getEventList();
   window.scrollTo(0, 0);
-}, [refresh]);
+  }, [refresh]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -96,16 +117,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} />}>
-            <Route index element={<Home services={services} />} />
+            <Route index element={<Home services={services} events={events}/>} />
             <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/about_us" element={<About staff={staff}  />} />
             <Route path="/contact" element={<Contact />} />
 
             { isLoggedIn ?
               <>
-                <Route path="/dashboard/staff" element={<Staff staff={staff} />} /> 
+                <Route path="/dashboard/staff" element={<Staff staff={staff} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
-                <Route path="/dashboard/events" element={<Events staff={staff} />} /> 
+                <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />

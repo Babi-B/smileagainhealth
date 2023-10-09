@@ -101,7 +101,7 @@ function AllServices(props) {
       <section id="team">
         <div className="container-lg py-5">
           <div className="d-flex justify-content-between flex-wrap mb-5">
-            <h3 className="blue-text">Complete List of All Staff</h3>
+            <h3 className="blue-text">Complete List of All Services</h3>
             <button
               className="btn btn-success px-3"
               data-bs-toggle="modal"
@@ -112,7 +112,7 @@ function AllServices(props) {
           </div>
           {props.services.length === 0 ? (
             <p className="fst-italic lead mb-4 text-center">
-              No Manager Has Been Registered
+              No Service Has Been Registered
             </p>
           ) : (
             <table className="table">
