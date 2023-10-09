@@ -50,14 +50,16 @@ function ContactIcons() {
         )}
 
       {showBackToTop && (
-      <img
-        src={WhatsApp}
-        alt="msger"
-        type="button"
-        className="btn btn-floating btn-lg"
-        id="whtsp"
-        onClick={backToTop}
-      />
+        <a href="https://wa.me/+237671752479" target="_blank">
+          <img
+            src={WhatsApp}
+            alt="msger"
+            type="button"
+            className="btn btn-floating btn-lg"
+            id="whtsp"
+            onClick={backToTop}
+          />
+        </a>
       )}
     </>
   );

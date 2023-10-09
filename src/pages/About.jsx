@@ -68,11 +68,11 @@ function About(props) {
                                 <div className="accordion-item">
                                 <h2 className="accordion-header">
                                     <button className="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Why Choose Us?
+                                    Our Services Are Specialized
                                     </button>
                                 </h2>
                                 <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                    <div className="accordion-body">At Smile Again Health we know that every patient is unique and require specialized care well designed to fit their everyday needs that is why before we provide care to our patients, we review them for their detailed need, produce tentative care plans to improve the patient’s health condition. </div>
                                 </div>
                                 </div>
                                 <div className="accordion-item">
@@ -82,7 +82,7 @@ function About(props) {
                                     </button>
                                 </h2>
                                 <div id="flush-collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                    <div className="accordion-body">Nurturing Care, Guided by Kindness: At our core, we embody a culture of compassion. With unwavering commitment, we provide personalized care that prioritizes kindness, care, and consideration. Adaptable to any environment, we deliver exceptional services and ensure the well-being of every patient. By blending expertise with empathy, we create a nurturing experience, fostering strong relationships and promoting holistic well-being.</div>
                                 </div>
                                 </div>
                                 <div className="accordion-item">

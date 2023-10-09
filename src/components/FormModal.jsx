@@ -26,6 +26,11 @@ function FormModal(props) {
     } else {
       setDescription("");
     }
+    if (props.service && props.service.imageUrl) {
+      setFileUpload(props.service.imageUrl);
+    } else {
+      setFileUpload(null);
+    }
   }, [props.service]);
 
   // CLEAR INPUT VALUES
@@ -63,6 +68,7 @@ function FormModal(props) {
   // };
 
   const createService = async () => {
+    console.log(`File to be edited ${fileUpload}`)
     try {
       // Save the service data to Firebase Firestore
       await props.addService({ name, description }, fileUpload);
@@ -78,7 +84,7 @@ function FormModal(props) {
   const updateService = async () => {
     try {
       // Update the service data in Firebase Firestore
-      await props.editService(props.service.id, { name, description });
+      await props.editService(props.service.id, { name, description }, fileUpload);
       console.log("Service updated");
       props.setEditFalse();
       clearValues();

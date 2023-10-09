@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import Card from "../components/Card";
 import FemaleDoc from "../assets/pics/female_doc.png"
@@ -10,6 +10,10 @@ function Staff(props) {
                                 <button className="btn btn-success">Edit</button>
                                 <button className="btn btn-danger">Delete</button>
                             </div>
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+    
     return(
         <>
             <MiniNavbar location="Dashboard/Staff" location_url="/dashboard/staff"/>

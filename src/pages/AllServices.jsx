@@ -14,6 +14,10 @@ function AllServices(props) {
   const serviceCollectionRef = collection(db, "services");
   
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setServices(props.services);
   }, [props.services]);
 
@@ -46,16 +50,27 @@ function AllServices(props) {
   };
 
   // EDIT A SERVICE
-  const editService = async (serviceId, updatedService) => {
+  const editService = async (serviceId, updatedService, fileUpload) => {
     try {
-      // Update the service in Firebase Firestore
-      await updateDoc(doc(db, "services", serviceId), updatedService);
-      // Update the services state with the updated service
-      setServices((prevServices) =>
-        prevServices.map((service) =>
-          service.id === serviceId ? { ...service, ...updatedService } : service
-        )
-      );
+          // Upload the new image to Firebase Storage
+    const storageRef = ref(storage, 'service-images/' + fileUpload.name);
+    const snapshot = await uploadBytes(storageRef, fileUpload);
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+      // Update the service data in Firebase Firestore, including the new image URL
+    await updateDoc(doc(db, "services", serviceId), {
+      ...updatedService,
+      imageUrl: downloadURL, // Include the new image URL in the updated service data
+    });
+
+    // Update the services state with the updated service
+    setServices((prevServices) =>
+      prevServices.map((service) =>
+        service.id === serviceId ? { ...service, ...updatedService, imageUrl: downloadURL } : service
+      )
+    );
       console.log("Service updated");
     } catch (error) {
       console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
@@ -104,6 +119,7 @@ function AllServices(props) {
               <thead>
                 <tr>
                   <th scope="col"></th>
+                  <th scope="col">Image</th>
                   <th scope="col" className="text-wrap">Name</th>
                   <th scope="col" className="">Description</th>
                   <th scope="col">Actions</th>
@@ -113,6 +129,7 @@ function AllServices(props) {
                 {props.services.map((service, index) => (
                   <tr key={service.id}>
                     <th scope="row">{index + 1}</th>
+                    <td><img src={service.imageUrl} alt={service.name} height="40" /></td>
                     <td>{service.name}</td>
                     <td>{service.description}</td>
                     <td className="btn">

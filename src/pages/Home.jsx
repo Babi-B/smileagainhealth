@@ -33,22 +33,22 @@ function Home(props) {
                         <div className="carousel-item active" data-interval="100">
                             <img src={FemaleDoctor} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
-                            <h2>The Secret to Long Life</h2>
-                            <p>Some representative placeholder content for the first slide.</p>
+                            <h2>Get Treated At Home</h2>
+                            <p>Smile Again Home Health Care played a very vital role in the clients’ life by keeping them healthy and happy at home, because there is no place like Home.</p>
                             </div>
                         </div>
                         <div className="carousel-item" data-interval="100">
                             <img src={Injecting} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
                             <h2>We Offer Home Care Services</h2>
-                            <p>Some representative placeholder content for the second slide.</p>
+                            <p>Our services are available to the clients who are Homebound, Bedbound, Wheelchair bound, or needing assistance with Daily Activities of Living (ADL).</p>
                             </div>
                         </div>
                         <div className="carousel-item" data-interval="100">
                             <img src={AvailableDoctor} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
-                            <h2>Some other info</h2>
-                            <p>Some representative placeholder content for the third slide.</p>
+                            <h2>Safe and Reliable Care</h2>
+                            <p>Our services are always provided under direct supervision of the physician and approved Care Plan.</p>
                             </div>
                         </div>
                         </div>
@@ -69,30 +69,30 @@ function Home(props) {
             {/* <!-- Mini Column --> */}
             <section id="mini-column">
                 <div className="text-center">
-                    <button type="button" className="header-btn btn btn-danger btn-lg">Make An Appointment</button>
+                    <a href="https://wa.me/+237671752479" target="_blank" className="header-btn btn btn-danger btn-lg" >Make An Appointment</a>
                 </div>
                 <div className="sectors container py-5">
                     <div className="row justify-content-center text-white gy-5 text-center">
                         <div className="col-sm-6 col-lg-4 col-xxl-3">
                             <div className="text-center">
-                                <i className="fas fa-first-aid fs-1"></i>
+                                <i className="fas fa-user-nurse fs-1 mb-3"></i>
                             </div>
-                            <h4>Lorem ipsum dolor sit amet.</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis placeat voluptas nihil a neque in nam repudiandae, tempora nisi! Itaque.</p>
+                            <h4>Our caregivers are:</h4>
+                            <p>Highly trained and experienced professionals</p>
                         </div>
                         <div className="col-sm-6 col-lg-4 col-xxl-3">
                             <div className="text-center">
-                                <i className="fas fa-capsules fs-1"></i>
+                                <i className="fas fa-thumbs-up fs-1 mb-3"></i>
                             </div>
-                            <h4>Lorem ipsum dolor sit amet.</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis placeat voluptas nihil a neque in nam repudiandae, tempora nisi! Itaque.</p>
+                            <h4>Reliable and Accountable</h4>
+                            <p>We show up on time, and deliver above and beyond</p>
                         </div>
                         <div className="col-sm-6 col-lg-4 col-xxl-3">
                             <div className="text-center">
-                                <i className="fas fa-heartbeat fs-1"></i>
+                                <i className="fas fa-heartbeat fs-1 mb-3"></i>
                             </div>
-                            <h4>Lorem ipsum dolor sit amet.</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis placeat voluptas nihil a neque in nam repudiandae, tempora nisi! Itaque.</p>
+                            <h4>We are</h4>
+                            <p>Passionate and caring people, and easily adapt to any situation</p>
                         </div>
                     </div>
                 </div>

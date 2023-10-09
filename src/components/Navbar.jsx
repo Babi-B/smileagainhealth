@@ -102,7 +102,7 @@ function Navbar(props) {
                   APPOINTMENT
                 </Link>
               </li>
-              <li className="nav-item ms-2 d-none d-md-inline px-2 rounded" id="signin">
+              <li className="nav-item ms-2 d-none d-md-inline px-1 rounded" id="signin">
               { props.isLoggedIn ? 
                 <Link
                   className="nav-link text-white"

@@ -102,7 +102,7 @@ body {
   bottom:0;
   left:0;
   right:0;
-  background:rgba(0,0,0,0.4);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
 }
 #home .carousel-caption {
   z-index: 20 !important;

@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../assets/pics/logo.png"
 
 function Footer() {
     return (
@@ -16,7 +17,7 @@ function Footer() {
                     
                         {/* Right (the icons) */}
                         <div className="col-sm-6 col-lg-3">
-                            <a href="" className="me-4 text-reset">
+                            <a href="https://www.facebook.com/profile.php?id=100091175119895&mibextid=ZbWKwL" target="_blank" className="me-4 text-reset">
                                 <i className="fab fa-facebook fs-1"></i>
                             </a>
                             <a href="https://www.instagram.com/smileagain_homehealthcare?r=nametag" target="_blank" className="me-4 text-reset">
@@ -39,21 +40,17 @@ function Footer() {
                     <div className="row mt-3">
                     {/* Grid column */}
                     <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4"><img src="logo.png" height="30" alt="logo" className="me-2" />SACFU</h6>
-                        <p>Some description</p>
+                        <h6 className="text-uppercase fw-bold mb-4"><img src={Logo} height="30" alt="logo" className="me-2" />Smile Again Health</h6>
+                        <p>The biggest benefit of home care is that your loved one is able to stay in an environment that is comfortable and familiar to them. They can sleep in their own bed, use their own bathroom, and continue their daily routines. </p>
                     </div>
                     {/* Grid column */}
             
                     {/* Grid column */}
                     <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        {/* Links */}
-                        <h6 className="text-uppercase fw-bold mb-4">
-                        {/* Services */}
-                        </h6>
-                        <p><a href="#logo" className="text-reset">24/7 home care</a></p>
-                        {/* <p><a href="#services" className="text-reset">Other</a></p>
-                        <p><a href="#services" className="text-reset">Other</a></p>
-                        <p><a href="#services" className="text-reset">Other</a></p> */}
+                        <div className="text-center">
+                            <i className="fas fa-solid fa-clock fs-2 mb-3"></i>
+                            <p>24/7 home care</p>
+                        </div>
                     </div>
                     {/* Grid column */}
             
@@ -61,7 +58,11 @@ function Footer() {
                     <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         {/* Links */}
                         <h6 className="text-uppercase fw-bold mb-4">Our Other Platforms</h6>
-                        <p><a href="https://www.instagram.com/smileagain_cameroon?igshid=ZGUzMzM3NWJiOQ" target="_blank" className="text-reset"><i className="fab fa-instagram me-1"></i>Smile Again Cameroon</a></p>
+                        <p><a href="https://www.instagram.com/smileagain_cameroon?igshid=ZGUzMzM3NWJiOQ" target="_blank" className="text-reset"><i className="fab fa-instagram me-1"></i>Smile Again Cameroon Instagram</a></p>
+                        <p><a href="https://www.facebook.com/profile.php?id=100091175119895&mibextid=ZbWKwL" target="_blank" className="me-4 text-reset">
+                                <i className="fab fa-facebook me-1"></i> Smile Again Cameroon Facebook
+                            </a>
+                        </p>
                         {/* <p><a href="#!" className="text-reset">Smile Again Charity</a></p>
                         <p><a href="#!" className="text-reset">Other</a></p>
                         <p><a href="#!" className="text-reset">Other</a></p> */}
