@@ -146,6 +146,10 @@ body {
   background-color: var(--theme-color);
 }
 
+.tilted-icon {
+  transform: rotate(-35deg);
+}
+
 footer {
   background-color: var(--theme-color);
 }

@@ -132,6 +132,7 @@ function Home(props) {
                         title={event.name}
                         description={event.description}
                         date={event.date}
+                        place={event.place}
                         time={event.time}
                         noDisplay="d-none"
                     />

@@ -116,48 +116,50 @@ function Events(props) {
               No Event Has Been Registered
             </p>
           ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Image</th>
-                  <th scope="col" className="text-wrap">Name</th>
-                  <th scope="col" className="">Description</th>
-                  <th scope="col" className="">Place</th>
-                  <th scope="col" className="">Date & Time</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {props.events.map((event, index) => (
-                  <tr key={event.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td><img src={event.imageUrl} alt={event.name} height="40" /></td>
-                    <td>{event.name}</td>
-                    <td>{event.description}</td>
-                    <td>{event.place}</td>
-                    <td>{event.date} <br /><br /> {event.time}</td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-trash text-danger"
-                        onClick={() => deleteEvent(event.id)}
-                      ></i>
-                    </td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-edit text-success"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        onClick={() => {
-                          setSelectedEvent(event);
-                          setForEdit(true)
-                        }}
-                      ></i>
-                    </td>
+            <div className="table-responsive table-responsive-sm">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Image</th>
+                    <th scope="col" className="text-wrap">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Place</th>
+                    <th scope="col" className="text-center">Date & Time</th>
+                    <th scope="col">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {props.events.map((event, index) => (
+                    <tr key={event.id}>
+                      <th scope="row">{index + 1}</th>
+                      <td><img src={event.imageUrl} alt={event.name} height="40" /></td>
+                      <td>{event.name}</td>
+                      <td>{event.description}</td>
+                      <td>{event.place}</td>
+                      <td>{event.date} <br /><br /> {event.time}</td>
+                      <td className="btn">
+                        <i 
+                          className="fas fa-trash text-danger"
+                          onClick={() => deleteEvent(event.id)}
+                        ></i>
+                      </td>
+                      <td className="btn">
+                        <i 
+                          className="fas fa-edit text-success"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          onClick={() => {
+                            setSelectedEvent(event);
+                            setForEdit(true)
+                          }}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </section>

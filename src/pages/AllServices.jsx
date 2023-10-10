@@ -115,44 +115,46 @@ function AllServices(props) {
               No Service Has Been Registered
             </p>
           ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Image</th>
-                  <th scope="col" className="text-wrap">Name</th>
-                  <th scope="col" className="">Description</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {props.services.map((service, index) => (
-                  <tr key={service.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td><img src={service.imageUrl} alt={service.name} height="40" /></td>
-                    <td>{service.name}</td>
-                    <td>{service.description}</td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-trash text-danger"
-                        onClick={() => deleteService(service.id)}
-                      ></i>
-                    </td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-edit text-success"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        onClick={() => {
-                          setSelectedService(service);
-                          setForEdit(true)
-                        }}
-                      ></i>
-                    </td>
+            <div className="table-responsive table-responsive-sm">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Image</th>
+                    <th scope="col" className="text-wrap">Name</th>
+                    <th scope="col" className="">Description</th>
+                    <th scope="col">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {props.services.map((service, index) => (
+                    <tr key={service.id}>
+                      <th scope="row">{index + 1}</th>
+                      <td><img src={service.imageUrl} alt={service.name} height="40" /></td>
+                      <td>{service.name}</td>
+                      <td>{service.description}</td>
+                      <td className="btn">
+                        <i 
+                          className="fas fa-trash text-danger"
+                          onClick={() => deleteService(service.id)}
+                        ></i>
+                      </td>
+                      <td className="btn">
+                        <i 
+                          className="fas fa-edit text-success"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          onClick={() => {
+                            setSelectedService(service);
+                            setForEdit(true)
+                          }}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </section>

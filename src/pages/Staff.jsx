@@ -115,44 +115,46 @@ function Staff(props) {
               No Staff Has Been Registered
             </p>
           ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Image</th>
-                  <th scope="col" className="text-wrap">Name</th>
-                  <th scope="col" className="">Description</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {props.staff.map((staff, index) => (
-                  <tr key={staff.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td><img src={staff.imageUrl} alt={staff.name} height="40" /></td>
-                    <td>{staff.name}</td>
-                    <td>{staff.description}</td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-trash text-danger"
-                        onClick={() => deleteStaff(staff.id)}
-                      ></i>
-                    </td>
-                    <td className="btn">
-                      <i 
-                        className="fas fa-edit text-success"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        onClick={() => {
-                          setSelectedStaff(staff);
-                          setForEdit(true)
-                        }}
-                      ></i>
-                    </td>
+            <div className="table-responsive table-responsive-sm">
+              <table className="table ">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Image</th>
+                    <th scope="col" className="text-wrap">Name</th>
+                    <th scope="col" className="">Description</th>
+                    <th scope="col">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {props.staff.map((staff, index) => (
+                    <tr key={staff.id}>
+                      <th scope="row">{index + 1}</th>
+                      <td><img src={staff.imageUrl} alt={staff.name} height="40" /></td>
+                      <td>{staff.name}</td>
+                      <td>{staff.description}</td>
+                      <td className="btn me-3">
+                        <i 
+                          className="fas fa-trash text-danger"
+                          onClick={() => deleteStaff(staff.id)}
+                        ></i>
+                      </td>
+                      <td className="btn">
+                        <i 
+                          className="fas fa-edit text-success"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          onClick={() => {
+                            setSelectedStaff(staff);
+                            setForEdit(true)
+                          }}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </section>
