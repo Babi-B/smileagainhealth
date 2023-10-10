@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import IntroVid from "../assets/videos/kampus.mp4"
 import HorizontalCard from "../components/HorizontalCard";
-import BabyPic from "../assets/pics/little_baby.jpg"
-import BabyIcon from "../assets/svg/baby.svg"
 
 function Services(props) {
     useEffect(() => {
