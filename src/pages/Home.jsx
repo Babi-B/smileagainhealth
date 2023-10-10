@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import FemaleDoctor from "../assets/pics/black-female-doctor-examining-small-boy-with-stethoscope-during-home-visit-due-covid19-pandemic.jpg"
 import Injecting from "../assets/pics/injecting.jpg"
 import AvailableDoctor from "../assets/pics/doctor_is_available.jpg"
+import HorizontalCard from "../components/HorizontalCard";
 
 
 function Home(props) {
@@ -119,6 +120,25 @@ function Home(props) {
                 </div>
             </section>
             <Timetable />
+            {/* <!-- Events Section --> */}
+            <section id="services" className="mt-5">
+                <div className="container-lg py-5">
+                    <h3 className="blue-text ">Our Events Include</h3>
+                    <div className="custom-hr mb-5"></div>
+                    {props.events.map((event) => (
+                        <HorizontalCard 
+                        key={event.id}
+                        img={event.imageUrl}
+                        title={event.name}
+                        description={event.description}
+                        date={event.date}
+                        time={event.time}
+                        noDisplay="d-none"
+                    />
+                    ))}
+                    
+                </div>
+            </section>
         </>
     )
 }

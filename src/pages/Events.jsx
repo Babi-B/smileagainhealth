@@ -18,8 +18,8 @@ function Events(props) {
   }, []);
 
   useEffect(() => {
-    setEvent(props.event);
-  }, [props.event]);
+    setEvent(props.events);
+  }, [props.events]);
 
   // ADD A EVENT
   const addEvent = async (event, fileUpload) => {
@@ -67,8 +67,8 @@ function Events(props) {
     });
 
     // Update the services state with the updated service
-    setEvent((prevEvent) =>
-      prevEvent.map((event) =>
+    setEvent((prevEvents) =>
+      prevEvents.map((event) =>
         event.id === eventId ? { ...event, ...updatedEvent, imageUrl: downloadURL } : event
       )
     );
@@ -83,7 +83,7 @@ function Events(props) {
   const deleteEvent = async (eventId) => {
     try {
       // Delete the event from Firebase Firestore
-      await deleteDoc(doc(db, "event", eventId));
+      await deleteDoc(doc(db, "events", eventId));
       // Update the events state by removing the deleted service
       setEvent((prevEvent) =>
         prevEvent.filter((event) => event.id !== eventId)
@@ -136,7 +136,7 @@ function Events(props) {
                     <td>{event.name}</td>
                     <td>{event.description}</td>
                     <td>{event.place}</td>
-                    <td>{event.Date}, {event.Time}</td>
+                    <td>{event.date} <br /><br /> {event.time}</td>
                     <td className="btn">
                       <i 
                         className="fas fa-trash text-danger"

@@ -11,7 +11,11 @@ function HorizontalCard(props) {
                     <i className="fas fa-first-aid fs-1 text-center d-block"></i>
                     <h5 className="py-2 text-center">{props.title}</h5>
                     <p className="card-text pb-3">{props.description}</p>
-                    <a href="https://wa.me/+237671752479" className="btn btn-outline-light border-2 d-block px-2 fw-bold">Make An Appointment</a>
+                    <a href="https://wa.me/+237671752479" className={`btn btn-outline-light border-2 d-block px-2 fw-bold ${props.noDisplay}`}>Make An Appointment</a>
+                    <div className="d-flex justify-content-between">
+                        <small>{props.date}</small>
+                        <small>{props.time}</small>
+                    </div>
                 </div>
             </div>
     )
