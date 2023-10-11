@@ -109,7 +109,7 @@ function Home(props) {
                         {services.map((service,index) =>(
                             <Card 
                             key={index}
-                            img={Injecting} 
+                            img={service.imageUrl} 
                             title={service.name}
                             description={service.description.length > 100
                                 ? `${service.description.substring(0, 100)}...`

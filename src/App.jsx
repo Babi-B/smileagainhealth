@@ -15,18 +15,22 @@ import { db } from "./firebase/config";
 import { getDocs, collection } from "firebase/firestore";
 
 import AllServices from "./pages/AllServices";
+import Managers from "./pages/Managers";
 
 function App() {
 
   const [staff, setStaff] = useState([]);
   const [services, setServices] = useState([]);
   const [events, setEvents] = useState([]);
+  const [managers, setManagers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   const staffCollectionRef = collection(db, 'staff');
   const serviceCollectionRef = collection(db, "services");
   const eventCollectionRef = collection(db, "events");
+  const managerCollectionRef = collection(db, "managers");
+
 
 
   const refreshApp = () => {
@@ -91,6 +95,25 @@ function App() {
   window.scrollTo(0, 0);
   }, [refresh]);
 
+  // FETCH ALL MANAGERS
+  useEffect(() => {
+    const getManagerList = async () => {
+      try {
+        const data = await getDocs(managerCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setManagers(filteredData);
+      } catch (error) {
+        console.error(`COULD NOT FETCH MANAGERS DATA. Error Message: ${error}`);
+      }
+    };
+
+  getManagerList();
+  window.scrollTo(0, 0);
+  }, [refresh]);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
@@ -127,6 +150,7 @@ function App() {
                 <Route path="/dashboard/staff" element={<Staff staff={staff} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
                 <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />

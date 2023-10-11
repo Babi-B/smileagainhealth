@@ -63,16 +63,34 @@ function FormModal(props) {
     }
   };
 
-  // const createManager = async () => {
-  //   try {
-  //     await createUserWithEmailAndPassword(auth, email, password, { name });
-  //     console.log("User Created")
-  //   } catch (error) {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     alert(`SIGN UP FAILED : ${errorMessage}`);
-  //   }
-  // };
+  // FOR MANAGERS ** TASK ID: 2
+  const createManager = async () => {
+    try {
+      const manager = await createUserWithEmailAndPassword(auth, email, password, { name });
+      console.log("User Created")
+      props.addManager({name, email, password})
+      clearValues();
+      props.refreshApp()
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`SIGN UP FAILED : ${errorMessage}`);
+    }
+  };
+
+  const updateManager = async () => {
+    try {
+      // Update the service data in Firebase Firestore
+      await props.editManager(props.service.id, { name, description }, fileUpload);
+      console.log("Service updated");
+      props.setEditFalse();
+      clearValues();
+      props.refreshApp();
+    } catch (error) {
+      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
+      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
+    }
+  };
 
   // FOR SERVICES ** TASK ID: 3
   const createService = async () => {
@@ -248,8 +266,40 @@ function FormModal(props) {
                       required
                     />
                   </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      <i className="fas fa-envelope me-2 text-secondary"></i>
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter your email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    required
+                    />
+                  </div>
+                  <div className="my-3">
+                    <label htmlFor="password" className="form-label">
+                      <i className="fas fa-lock me-2 text-secondary"></i>
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      required
+                    />
+                  </div>
                 </>
-                }
+              }
 
                 {/* CREATE AND EDIT SERVICE AND STAFF */}
                 {props.taskID === 3 || props.taskID === 4 ?
@@ -292,8 +342,9 @@ function FormModal(props) {
                       required
                     />
                   </div>
-                </> : 
-                
+                </> : null
+                }
+                {props.taskID === 5 &&
                 <>
                 {/* CREATE AND EDIT EVENTS */}
                 <input 
@@ -381,13 +432,13 @@ function FormModal(props) {
               </>
                 }
                 
-
               <p className="text-danger">{error}</p>
               <div className="d-grid">
                 <button
                   className="btn btn-info text-white btn-lg bg-blue"
                   onClick={props.taskID === 1 ? 
-                    signIn : props.taskID === 2 ?
+                    signIn : props.taskID === 2 && props.forEdit?
+                    updateManager : props.taskID === 2 ?
                     createManager: props.taskID === 3 && props.forEdit ? 
                     updateService: props.taskID === 3 ?
                     createService: props.taskID === 4 && props.forEdit ?
@@ -397,7 +448,8 @@ function FormModal(props) {
                   }
                 >
                   {props.taskID === 1 ? 
-                  "SIGN IN" : props.taskID === 2 ? 
+                  "SIGN IN" : props.taskID === 2 && props.forEdit? 
+                  "UPDATE MANAGER": props.taskID === 2 ? 
                   "CREATE MANAGER": props.taskID === 3 && props.forEdit ? 
                   "UPDATE SERVICE":  props.taskID === 3 ?
                   "CREATE SERVICE": props.taskID === 4 && props.forEdit ?
