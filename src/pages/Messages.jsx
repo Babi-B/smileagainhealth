@@ -3,9 +3,12 @@ import MiniNavbar from "../components/MiniNavbar";
 import { db } from "../firebase/config";
 import { collection, doc, deleteDoc } from "firebase/firestore";
 import "../About.css";
+import Logo from "../assets/pics/logo.png"
 
 function Messages(props) {
   const [messages, setMessages] = useState(props.messages);
+  const [selectedMessage, setSelectedMessage] = useState("");
+
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,6 +27,7 @@ function Messages(props) {
       setMessages((prevMessages) =>
         prevMessages.filter((message) => message.id !== messageId)
       );
+      props.refreshApp()
       alert("Message deleted");
       props.refreshApp()
     } catch (error) {
@@ -73,6 +77,14 @@ function Messages(props) {
                           onClick={() => deleteMessage(message.id)}
                         ></i>
                       </td>
+                      <td className="btn">
+                        <i 
+                            className="far fa-eye text-success" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#messageModal"
+                            onClick={() => setSelectedMessage(message)}
+                            ></i>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -81,6 +93,41 @@ function Messages(props) {
           )}
         </div>
       </section>
+
+      {/* <!-- Modal --> */}
+      <div className="modal fade" id="messageModal" tabIndex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <img src={Logo} alt="" className="modal-title" id="exampleModalLabel" height="50" />
+                    {/* <h5 className="modal-title" id="messageModalLabel">Client's Message</h5> */}
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <div>
+                        <p className="fw-bold">Message Title</p>
+                        <p>{selectedMessage.title}</p>
+                    </div><hr />
+                    <div>
+                        <p className="fw-bold">Client's Name:</p>
+                        <p>{selectedMessage.name}</p>
+                    </div><hr />
+                    <div>
+                        <p className="fw-bold">Client's Email:</p>
+                        <p>{selectedMessage.email}</p>
+                    </div><hr />
+                    <div>
+                        <p className="fw-bold">Client's Tel:</p>
+                        <p>{selectedMessage.phone}</p>
+                    </div><hr />
+                    <div>
+                        <p className="fw-bold">Clent Message</p>
+                        <p>{selectedMessage.message}</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </>
   );
 }
