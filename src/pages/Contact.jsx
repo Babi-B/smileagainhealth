@@ -1,12 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import "../Contact.css"
 import Timetable from "../components/Timetable";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 function Contact() {
+    const [messages, setMessages] = useState("");
+    const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+
+    const messageCollectionRef = collection(db, "messages")
+
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
+
+    
+      // ADD A MESSAGE
+    const addMessage = async () => {
+        try {
+            const docRef = await addDoc(messageCollectionRef, {
+                title, 
+                name, 
+                email, 
+                phone, 
+                message,
+            })
+            
+            const newMessage = {
+            title, 
+            name, 
+            email, 
+            phone, 
+            message,
+            id: docRef.id, 
+            };
+
+        setMessage([...messages, newMessage]);
+        console.log("MESSAGE ADDED")
+        } catch (error) {
+        console.error(`COULD NOT ADD MESSAGE. Error Message: ${error}`);
+        }
+    };
+
     return (
         <>
             <MiniNavbar location="Contact" location_url="/contact" />
@@ -73,26 +113,76 @@ function Contact() {
         <div className="container-lg py-5">
             <h3 className="blue-text ">Leave A Message</h3>
             <div className="custom-hr mb-5"></div>
+            <p className="mb-5">Thank you for visiting our site! We value your involvement and feedback. Whether you're interested in volunteering, seeking online consultations, or have any suggestions, we're here for you. Together, let's make a difference in healthcare.</p>
             <div className="row justify-content-center">
-                <form className="col-8">
+                <div className="col-8">
+                <div className="form-group">
+                        <label htmlFor="title" className="d-none">Message Title</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="title" 
+                            placeholder="Your message title*" 
+                            onChange={(e) => {
+                                setTitle(e.target.value);
+                              }}
+                            required />
+                      </div>
                     <div className="form-group">
                         <label htmlFor="name" className="d-none">Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="Your name*" required />
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="name" 
+                            placeholder="Your name*" 
+                            onChange={(e) => {
+                                setName(e.target.value);
+                              }}
+                            required />
                       </div>
                     <div className="form-group mt-3">
                       <label htmlFor="email" className="d-none">Email address</label>
-                      <input type="email" className="form-control" id="email" placeholder="Your email*" required />
+                      <input 
+                        type="email" 
+                        className="form-control" 
+                        id="email" 
+                        placeholder="Your email*" 
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
+                        required />
                     </div>
                     <div className="form-group mt-3">
-                        <label htmlFor="email" className="d-none">Email phone</label>
-                        <input type="email" className="form-control" id="phone" placeholder="Your phone" />
+                        <label htmlFor="email" className="d-none">Phone number</label>
+                        <input 
+                        type="text" 
+                        className="form-control" 
+                        id="phone" 
+                        placeholder="Your phone number" 
+                        onChange={(e) => {
+                            setPhone(e.target.value);
+                          }}
+                        required/>
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="msge" className="d-none">Message</label>
-                      <textarea className="form-control" id="msge" rows="3" placeholder="Message*" required></textarea>
+                      <textarea 
+                        className="form-control"
+                         id="msge" 
+                         rows="3" 
+                         placeholder="Message*"
+                         onChange={(e) => {
+                            setMessage(e.target.value);
+                          }}
+                        required></textarea>
                     </div>
-                    <button type="submit" className="btn btn-info mt-3 text-white w-100">SEND</button>
-                  </form>
+                    <button 
+                        className="btn btn-info mt-3 text-white w-100"
+                        onClick={addMessage}
+                        >SEND 
+                        <i className="fas fa-paper-plane ms-2"></i>
+                        </button>
+                  </div>
             </div>
         </div>
     </section>

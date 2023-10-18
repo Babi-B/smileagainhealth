@@ -121,25 +121,27 @@ function Home(props) {
             </section>
             <Timetable />
             {/* <!-- Events Section --> */}
-            <section id="services" className="mt-5">
-                <div className="container-lg py-5">
-                    <h3 className="blue-text ">Our Events Include</h3>
-                    <div className="custom-hr mb-5"></div>
-                    {props.events.map((event) => (
-                        <HorizontalCard 
-                        key={event.id}
-                        img={event.imageUrl}
-                        title={event.name}
-                        description={event.description}
-                        date={event.date}
-                        place={event.place}
-                        time={event.time}
-                        noDisplay="d-none"
-                    />
-                    ))}
-                    
-                </div>
-            </section>
+            {props.events &&
+                <section id="services" className="mt-5">
+                    <div className="container-lg py-5">
+                        <h3 className="blue-text ">Our Events Include</h3>
+                        <div className="custom-hr mb-5"></div>
+                        {props.events.map((event) => (
+                            <HorizontalCard 
+                            key={event.id}
+                            img={event.imageUrl}
+                            title={event.name}
+                            description={event.description}
+                            date={event.date}
+                            place={event.place}
+                            time={event.time}
+                            noDisplay="d-none"
+                        />
+                        ))}
+                        
+                    </div>
+                </section>
+            }
         </>
     )
 }

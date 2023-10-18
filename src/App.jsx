@@ -8,6 +8,7 @@ import Services from "./pages/Services"
 import Staff from "./pages/Staff"
 import Events from "./pages/Events"
 import NotFound from "./pages/NotFound"
+import Messages from "./pages/Messages"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { auth } from "./firebase/config"
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -23,6 +24,7 @@ function App() {
   const [services, setServices] = useState([]);
   const [events, setEvents] = useState([]);
   const [managers, setManagers] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
@@ -30,7 +32,7 @@ function App() {
   const serviceCollectionRef = collection(db, "services");
   const eventCollectionRef = collection(db, "events");
   const managerCollectionRef = collection(db, "managers");
-
+  const messageCollectionRef = collection(db, "messages");
 
 
   const refreshApp = () => {
@@ -114,6 +116,28 @@ function App() {
   window.scrollTo(0, 0);
   }, [refresh]);
 
+
+   // FETCH ALL MESSAGES
+   useEffect(() => {
+    const getMessageList = async () => {
+      try {
+        const data = await getDocs(messageCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id
+        }));
+        console.log(filteredData);
+        setMessages(filteredData);
+      } catch (error) {
+        console.error(`COULD NOT FETCH MESSAGES DATA. Error Message: ${error}`);
+      }
+    };
+
+    getMessageList();
+    window.scrollTo(0, 0);
+  }, []);
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
@@ -143,14 +167,15 @@ function App() {
             <Route index element={<Home services={services} events={events}/>} />
             <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/about_us" element={<About staff={staff}  />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact messages={messages} refreshApp={refreshApp}  />} />
 
             { isLoggedIn ?
               <>
-                <Route path="/dashboard/staff" element={<Staff staff={staff} refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/staff" element={<Staff staff={staff} refremessages={messages}shApp={refreshApp} />} /> 
                 <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
                 <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/messages" element={<Messages messages={messages}  refreshApp={refreshApp} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />

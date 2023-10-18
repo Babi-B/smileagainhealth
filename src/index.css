@@ -1,7 +1,9 @@
 :root {
   --theme-color:#488FB1;
+  /* --theme-color: #ffa500; */
   --secondary-color:rgb(254, 187, 52);
   --link-color:#09c6f9;
+  /* --link-color:#fcb430; */
   --red: rgb(183, 3, 3);
 }
 

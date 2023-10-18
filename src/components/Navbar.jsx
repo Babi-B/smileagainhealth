@@ -72,6 +72,7 @@ function Navbar(props) {
                   <Link className="dropdown-item" to="/dashboard/services">All Services</Link>
                   <Link className="dropdown-item" to="/dashboard/events">All Events</Link>
                   <Link className="dropdown-item" to="/dashboard/managers">All Managers</Link>
+                  <Link className="dropdown-item" to="/dashboard/messages">All Messages</Link>
                 </div>
               </li>
               }
