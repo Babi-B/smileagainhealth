@@ -97,7 +97,7 @@ function Home(props) {
             {/* <!-- Services Section --> */}
             <section id="services">
                 <div className="container-lg py-5">
-                    <h3 className="blue-text ">Some of the services we offer include</h3>
+                    <h3 className="yellow-text ">Some of the services we offer include</h3>
                     <div className="custom-hr mb-5"></div>
                     <div className="row justify-content-center align-items-center g-4">
                         {services.map((service,index) =>(
@@ -119,7 +119,7 @@ function Home(props) {
             {props.events &&
                 <section id="services" className="mt-5">
                     <div className="container-lg py-5">
-                        <h3 className="blue-text ">Our Events Include</h3>
+                        <h3 className="yellow-text ">Our Events Include</h3>
                         <div className="custom-hr mb-5"></div>
                         {props.events.map((event) => (
                             <HorizontalCard 

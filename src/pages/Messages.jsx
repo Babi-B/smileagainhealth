@@ -40,7 +40,7 @@ function Messages(props) {
       <section id="team">
         <div className="container-lg py-5">
           <div className="d-flex justify-content-between flex-wrap mb-5">
-            <h3 className="blue-text">Complete List of All Messages</h3>
+            <h3 className="yellow-text">Complete List of All Messages</h3>
           </div>
           {props.messages.length === 0 ? (
             <p className="fst-italic lead mb-4 text-center">

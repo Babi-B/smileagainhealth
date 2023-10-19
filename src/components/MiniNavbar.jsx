@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 export default function MiniNavbar(props) {
     return(
         <>
-          <section className="bg-blue">
+          <section className="bg-yellow">
                 <div className="cust-grad">
                     <div className="container-lg">
                         <div className="d-flex flex-wrap justify-content-between text-white py-5">

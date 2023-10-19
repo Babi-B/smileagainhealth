@@ -17,14 +17,14 @@ function About(props) {
             {/* <!-- Main About Us Section --> */}
                 <section id="bg-infomation">
                     <div className="container-lg py-5">
-                        <h3 className="blue-text">Who We Are</h3>
+                        <h3 className="yellow-text">Who We Are</h3>
                         <div className="custom-hr mb-5"></div>
                         <div className="row justify-content-center">
                             <div className="col-sm-8 col-md-6 p-0">
                                 <img src={GroupPic} alt="the team" className="w-100" />
                             </div>
                             <div className="col-sm-8 col-md-6 bg-gray p-5 bottom-border">
-                                {/* <h5 className="blue-text">Lorem ipsum dolor sit amet.</h5> */}
+                                {/* <h5 className="yellow-text">Lorem ipsum dolor sit amet.</h5> */}
                                 <p>
                                     We are a non-profit, humanitarian association called Smile Again Charity Foundation for the Underprivileged with acronym S.A.C.F.U. with head office in Newtown, Limbe, SWR-237, Cameroon. We provide benevolent support to underprivileged children and underprivileged communities by empowering the children with standardized vocational training, work placement, Health sensitization and Entrepreneurial skill development
                                 </p>
@@ -39,7 +39,7 @@ function About(props) {
                 {/* <!-- Services Section --> */}
             <section id="team">
                 <div className="container-lg py-5">
-                    <h3 className="blue-text">Our Healthcare Administration</h3>
+                    <h3 className="yellow-text">Our Healthcare Administration</h3>
                     <div className="custom-hr mb-5"></div>
                     <div className="row justify-content-center align-items-center g-4"></div>
                     {
@@ -62,12 +62,12 @@ function About(props) {
                 <div className="container-lg py-5">
                     <div className="row g-4">
                         <div className="col-md-12 col-lg-6">
-                            <h3 className="blue-text ">More About Us</h3>
+                            <h3 className="yellow-text ">More About Us</h3>
                             <div className="custom-hr mb-5"></div> 
                             <div className="accordion accordion-flush justify-self-center" id="accordionFlushExample">
                                 <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button className="accordion-button collapsed bg-yellow text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                     Our Services Are Specialized
                                     </button>
                                 </h2>
@@ -77,7 +77,7 @@ function About(props) {
                                 </div>
                                 <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    <button className="accordion-button collapsed bg-yellow text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                     Our Principles/Philosopy
                                     </button>
                                 </h2>
@@ -87,7 +87,7 @@ function About(props) {
                                 </div>
                                 <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    <button className="accordion-button collapsed bg-yellow text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                     Our Mission
                                     </button>
                                 </h2>
@@ -99,7 +99,7 @@ function About(props) {
                                 </div>
                                 <div className="accordion-item">
                                     <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                    <button className="accordion-button collapsed bg-yellow text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                                         How We Do It
                                     </button>
                                     </h2>
@@ -115,7 +115,7 @@ function About(props) {
 
                         {/* <!-- Testimonies --> */}
                         <div id="testimonies" className=" col-md-12 col-lg-6">
-                            <h3 className="blue-text ">Testimonials</h3>
+                            <h3 className="yellow-text ">Testimonials</h3>
                             <div className="custom-hr mb-5"></div>
                             <div id="carousel">
                                 <div id="carouselExampleCaptions" className="carousel slide py-5 px-3" data-bs-ride="carousel">

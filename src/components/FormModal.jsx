@@ -415,7 +415,7 @@ function FormModal(props) {
                 
               <div className="d-grid">
                 <button
-                  className="btn btn-info text-white btn-lg bg-blue"
+                  className="btn btn-info text-white btn-lg bg-yellow"
                   onClick={props.taskID === 1 ? 
                     signIn : props.taskID === 2 && props.forEdit?
                     updateManager : props.taskID === 2 ?

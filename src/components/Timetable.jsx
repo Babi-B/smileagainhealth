@@ -7,7 +7,7 @@ function Timetable() {
         <>
             <section id="time-table">
                 <div className="container-lg py-5">
-                    <h3 className="blue-text ">Our Available Times</h3>
+                    <h3 className="yellow-text ">Our Available Times</h3>
                     <div className="custom-hr mb-5"></div>
                     <div className="row justify-content-center">
                         <img className="col-sm-8 col-md-5 col-lg-4 col-xxl-3

@@ -84,7 +84,7 @@ function CreateUser(props) {
               <p className="text-danger" >{error}</p>
                 <div className="d-grid">
                   <button
-                    className="btn btn-info text-white btn-lg bg-blue"
+                    className="btn btn-info text-white btn-lg bg-yellow"
                     onClick={ isLoggedIn ? createManager:signIn}
                   >
                     { isLoggedIn ? "CREATE MANAGER":"SIGN IN"}

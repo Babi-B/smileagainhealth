@@ -24,7 +24,7 @@ function Services(props) {
 
             {/* <!-- Intro vid --> */}
             <section id="about" className="container-lg my5">
-                <h3 className="blue-text mt-5">We Offer A Range of Services</h3>
+                <h3 className="yellow-text mt-5">We Offer A Range of Services</h3>
                 <div className="custom-hr mb-5"></div>
                 <div className="row justify-content-center align-items-center g-3">
                     <div className="col-md-6 embed-responsive embed-responsive-16by9 text-center">
@@ -45,7 +45,7 @@ function Services(props) {
             {/* Service Cards */}
             <section id="services" className="mt-5">
                 <div className="container-lg py-5">
-                    <h3 className="blue-text ">Some Of Our Services Include</h3>
+                    <h3 className="yellow-text ">Some Of Our Services Include</h3>
                     <div className="custom-hr mb-5"></div>
                     {props.services.map((service) => (
                         <div key={service.id} ref={service.id === servicePointer ? targetServiceRef : null}>
@@ -58,7 +58,7 @@ function Services(props) {
                     ))}   
                 </div>
             </section>
-            <section className="bg-blue text-white text-center" >
+            <section className="bg-yellow text-white text-center" >
                 <div className="cust-grad p-5">
                     <p className="lead ">INFORMATION  FOR THE FAMILY</p>
                     <p>It can be hard for any of us to accept difficult truths, especially when it comes to our own abilities. As our parents age, they will slowly lose their independence. They may face memory loss or even chronic disease; everyday tasks such as preparing a meal or driving to the store could pose a risk. Your primary concern is for their safety, but you also respect their desire for independence.</p>

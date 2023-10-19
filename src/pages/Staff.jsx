@@ -98,7 +98,7 @@ function Staff(props) {
       <section id="team">
         <div className="container-lg py-5">
           <div className="d-flex justify-content-between flex-wrap mb-5">
-            <h3 className="blue-text">Complete List of All Staff</h3>
+            <h3 className="yellow-text">Complete List of All Staff</h3>
             <button
               className="btn btn-success px-3"
               data-bs-toggle="modal"
