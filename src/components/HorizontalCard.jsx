@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../SearchBar.css';
 
 function HorizontalCard(props) {
@@ -17,7 +16,7 @@ function HorizontalCard(props) {
       time.setMinutes(minutes);
       return time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     } catch (error) {
-      console.error('Error formatting time:', error);
+      alert('Error formatting time:', error);
       return '';
     }
   };

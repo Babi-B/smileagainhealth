@@ -49,10 +49,9 @@ function App() {
           ...doc.data(),
           id: doc.id
         }));
-        console.log(filteredData);
         setStaff(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH STAFF DATA. Error Message: ${error}`);
+        alert(`COULD NOT FETCH STAFF DATA. Error Message: ${error}`);
       }
     };
 
@@ -71,7 +70,7 @@ function App() {
         }));
         setServices(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH SERVICES DATA. Error Message: ${error}`);
+        alert(`COULD NOT FETCH SERVICES DATA. Error Message: ${error}`);
       }
     };
 
@@ -90,7 +89,7 @@ function App() {
         }));
         setEvents(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH EVENTS DATA. Error Message: ${error}`);
+        alert(`COULD NOT FETCH EVENTS DATA. Error Message: ${error}`);
       }
     };
 
@@ -109,7 +108,7 @@ function App() {
         }));
         setManagers(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH MANAGERS DATA. Error Message: ${error}`);
+        alert(`COULD NOT FETCH MANAGERS DATA. Error Message: ${error}`);
       }
     };
 
@@ -127,10 +126,9 @@ function App() {
           ...doc.data(),
           id: doc.id
         }));
-        console.log(filteredData);
         setMessages(filteredData);
       } catch (error) {
-        console.error(`COULD NOT FETCH MESSAGES DATA. Error Message: ${error}`);
+        alert(`COULD NOT FETCH MESSAGES DATA. Error Message: ${error}`);
       }
     };
 

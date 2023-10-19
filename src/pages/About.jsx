@@ -52,7 +52,7 @@ function About(props) {
                                 noDisplay="d-none"
                                 key={staff.id}
                             />
-                    ))
+                        ))
                     }
                 </div>
             </section>

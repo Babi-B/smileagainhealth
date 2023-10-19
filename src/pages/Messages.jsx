@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import { db } from "../firebase/config";
-import { collection, doc, deleteDoc } from "firebase/firestore";
-import "../About.css";
+import { doc, deleteDoc } from "firebase/firestore";
 import Logo from "../assets/pics/logo.png"
 
 function Messages(props) {
@@ -31,7 +30,6 @@ function Messages(props) {
       alert("Message deleted");
       props.refreshApp()
     } catch (error) {
-      console.error(`COULD NOT DELETE SERVICE: ${error.message}`);
       alert(`COULD NOT DELETE SERVICE: ${error.message}`);
     }
   };

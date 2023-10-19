@@ -30,9 +30,9 @@ function Managers(props) {
       const newManager = {...manager, id: docRef.id};
 
       setManagers([...managers, newManager]);
-      console.log("MANAGER ADDED")
+      alert("MANAGER ADDED")
     } catch (error) {
-      console.error(`COULD NOT ADD MANAGER. Error Message: ${error}`);
+      alert(`COULD NOT ADD MANAGER. Error Message: ${error}`);
     }
   };
 
@@ -57,10 +57,10 @@ function Managers(props) {
       }
   
       // Handle success or show appropriate message
-      console.log("Manager details and user authentication updated successfully");
+      alert("MANAGER UPDATED");
     } catch (error) {
       // Handle error or show appropriate message
-      console.error("Error editing manager details and user authentication:", error);
+      alert("Error editing manager details and user authentication:", error);
     }
   };
 
@@ -81,10 +81,10 @@ function Managers(props) {
       }
   
       // Handle success or show appropriate message
-      console.log("Manager and user deleted successfully");
+      alert("MANAGER DELETED");
     } catch (error) {
       // Handle error or show appropriate message
-      console.error("Error deleting manager and user:", error);
+      alert("Error deleting manager and user:", error);
     }
   };
 

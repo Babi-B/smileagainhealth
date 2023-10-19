@@ -16,20 +16,15 @@ function CreateUser(props) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setIsLoggedIn(true)
-      console.log("LOGGED IN")
+      alert("LOGGED IN SUCCESSFULLY")
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // return error = "Invalid Email or Password"
       alert(`SIGN IN FAILED: ${errorMessage}`);
     }
   };
 
   const createManager = async () => {
-    // console.log("Loading ...")
     try {
       await createUserWithEmailAndPassword(auth, email, password)
-    // console.log("Successfull ...")
     }catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

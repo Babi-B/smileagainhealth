@@ -3,7 +3,6 @@ import MiniNavbar from "../components/MiniNavbar";
 import FormModal from "../components/FormModal";
 import { db, storage } from "../firebase/config";
 import { collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
-import "../About.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Staff(props) {
@@ -43,7 +42,6 @@ function Staff(props) {
       };
 
       setStaff([...allStaff, newStaff]);
-      props.refreshApp()
       alert("STAFF ADDED")
     } catch (error) {
       alert(`COULD NOT ADD STAFF. Error Message: ${error}`);
@@ -72,8 +70,7 @@ function Staff(props) {
         staff.id === staffId ? { ...staff, ...updatedStaff, imageUrl: downloadURL } : staff
       )
     );
-      props.refreshApp()
-      alert("Staff updated");
+    alert("STAFF UPDATED")
     } catch (error) {
       alert(`COULD NOT UPDATE STAFF: ${error.message}`);
     }
@@ -91,7 +88,6 @@ function Staff(props) {
       props.refreshApp()
       alert("Staff deleted");
     } catch (error) {
-      console.error(`COULD NOT DELETE STAFF: ${error.message}`);
       alert(`COULD NOT DELETE STAFF: ${error.message}`);
     }
   };

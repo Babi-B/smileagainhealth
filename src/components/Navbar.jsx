@@ -112,7 +112,7 @@ function Navbar(props) {
               </li>
               }
               <li className="nav-item d-lg-none">
-                <a a href="https://wa.me/+237671752479" target="_blank" className="nav-link navbar-link">
+                <a href="https://wa.me/+237671752479" target="_blank" className="nav-link navbar-link">
                   APPOINTMENT
                 </a>
               </li>

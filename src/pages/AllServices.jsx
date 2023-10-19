@@ -3,7 +3,6 @@ import MiniNavbar from "../components/MiniNavbar";
 import FormModal from "../components/FormModal";
 import { db, storage } from "../firebase/config";
 import { collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
-import "../About.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function AllServices(props) {
@@ -43,7 +42,6 @@ function AllServices(props) {
       };
 
       setServices([...services, newService]);
-      props.refreshApp()
       alert("SERVICE ADDED")
     } catch (error) {
       alert(`COULD NOT ADD SERVICE. Error Message: ${error}`);
@@ -72,8 +70,7 @@ function AllServices(props) {
         service.id === serviceId ? { ...service, ...updatedService, imageUrl: downloadURL } : service
       )
     );
-      props.refreshApp()
-      alert("Service updated");
+      alert("SERVICE UPDATED");
     } catch (error) {
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);

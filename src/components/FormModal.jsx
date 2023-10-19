@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import Logo from "../assets/pics/logo.png"
 
 function FormModal(props) {
@@ -13,27 +13,6 @@ function FormModal(props) {
 
   const [password, setPassword] = useState("");
   const [fileUpload, setFileUpload] = useState(null)
-
-  console.log(`FORM TASK ID ${props.taskID}`)
-
-  useEffect(() => {
-    if (props.service && props.service.name) {
-      setName(props.service.name);
-    } else {
-      setName("");
-    }
-  
-    if (props.service && props.service.description) {
-      setDescription(props.service.description);
-    } else {
-      setDescription("");
-    }
-    if (props.service && props.service.imageUrl) {
-      setFileUpload(props.service.imageUrl);
-    } else {
-      setFileUpload(null);
-    }
-  }, [props.service]);
 
   // CLEAR INPUT VALUES
   const clearValues = () => {
@@ -51,7 +30,7 @@ function FormModal(props) {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      clearValues();
+      props.refreshApp();
       alert("SIGN IN SUCCESSFULL");
     } catch (error) {
       alert(`SIGN IN FAILED`);
@@ -62,12 +41,11 @@ function FormModal(props) {
   const createManager = async () => {
     try {
       const manager = await createUserWithEmailAndPassword(auth, email, password, { name });
-      alert("USER CREATED")
+      alert("MANAGER CREATED")
       props.addManager({name, email, password})
-      clearValues();
       props.refreshApp()
     } catch (error) {
-      alert(`FAILED TO CREATE USER`);
+      alert(`FAILED TO CREATE MANAGER`);
     }
   };
 
@@ -75,9 +53,7 @@ function FormModal(props) {
     try {
       // Update the service data in Firebase Firestore
       await props.editManager(props.service.id, { name, description }, fileUpload);
-      alert("Service updated");
       props.setEditFalse();
-      clearValues();
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE SERVICE`);
@@ -89,11 +65,8 @@ function FormModal(props) {
     try {
       // Save the service data to Firebase Firestore
       await props.addService({ name, description }, fileUpload);
-      console.log("Service Created");
-      clearValues();
       props.refreshApp()
     } catch (error) {
-      console.error(`COULD NOT CREATE SERVICE : ${error.message}`);
       alert(`COULD NOT CREATE SERVICE : ${error.message}`);
     }
   };
@@ -102,27 +75,20 @@ function FormModal(props) {
     try {
       // Update the service data in Firebase Firestore
       await props.editService(props.service.id, { name, description }, fileUpload);
-      console.log("Service updated");
       props.setEditFalse();
-      clearValues();
       props.refreshApp();
     } catch (error) {
-      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
     }
   };
 
   // FOR STAFF ** TASK ID: 4
   const createStaff = async () => {
-    console.log(`Creating Staff...`)
     try {
       // Save the service data to Firebase Firestore
       await props.addStaff({ name, description }, fileUpload);
-      console.log("Staff Created");
-      clearValues();
       props.refreshApp()
     } catch (error) {
-      console.error(`COULD NOT CREATE STAFF : ${error.message}`);
       alert(`COULD NOT CREATE STAFF : ${error.message}`);
     }
   };
@@ -131,27 +97,21 @@ function FormModal(props) {
     try {
       // Update the service data in Firebase Firestore
       await props.editStaff(props.staff.id, { name, description }, fileUpload);
-      console.log("STAFF updated");
       props.setEditFalse();
-      clearValues();
       props.refreshApp();
     } catch (error) {
-      console.error(`COULD NOT UPDATE STAFF: ${error.message}`);
       alert(`COULD NOT UPDATE STAFF: ${error.message}`);
     }
   };
 
   // FOR EVENT ** TASK ID: 5
   const createEvent = async () => {
-    console.log(`Creating Event...`)
+    alert(`Creating Event...`)
     try {
       // Save the event data to Firebase Firestore
       await props.addEvent({ name, description, place, time, date }, fileUpload);
-      console.log("Event Created");
-      clearValues();
       props.refreshApp()
     } catch (error) {
-      console.error(`COULD NOT CREATE EVENT : ${error.message}`);
       alert(`COULD NOT CREATE EVENT : ${error.message}`);
     }
   };
@@ -160,12 +120,10 @@ function FormModal(props) {
     try {
       // Update the event data in Firebase Firestore
       await props.editEvent(props.event.id, { name, description, place, time, date }, fileUpload);
-      console.log("Event updated");
+      alert("Event updated");
       props.setEditFalse();
-      clearValues();
       props.refreshApp();
     } catch (error) {
-      console.error(`COULD NOT UPDATE EVENT: ${error.message}`);
       alert(`COULD NOT UPDATE EVENT: ${error.message}`);
     }
   };
@@ -176,6 +134,34 @@ function FormModal(props) {
   // TASK ID 3 --> CREATE SERVICE
   // TASK ID 4 --> CREATE STAFF
   // TASK ID 5 --> CREATE EVENT
+
+  useEffect(() => {
+    if(props.forEdit) {
+      if (props.taskID == 3 ) {
+        setName(props.service.name);
+        setDescription(props.service.description);
+        setFileUpload(props.service.imageUrl);
+      } else if (props.taskID == 4) {
+        setName(props.staff.name);
+        setDescription(props.staff.description);
+        setFileUpload(props.staff.imageUrl);
+      } else if (props.taskID == 5) {
+        setName(props.event.name);
+        setDescription(props.event.description);
+        setFileUpload(props.event.imageUrl);
+        setTime(props.event.time)
+        setDate(props.event.date)
+        setPlace(props.event.place)
+      } else if (props.taskID == 2) {
+        setName(props.manager.name);
+        setEmail(props.message.email)
+        setPassword(props.message.password)
+      }
+     else {
+        clearValues()
+      }
+    }
+  }, [props.forEdit]);
 
 
 
@@ -253,6 +239,7 @@ function FormModal(props) {
                       type="text"
                       className="form-control"
                       id="name"
+                      value={name}
                       placeholder="Enter the name"
                       onChange= {(e) => {setName(e.target.value);}}
                       required
@@ -268,6 +255,7 @@ function FormModal(props) {
                       className="form-control"
                       id="email"
                       placeholder="Enter your email"
+                      value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
@@ -284,6 +272,7 @@ function FormModal(props) {
                       className="form-control"
                       id="password"
                       placeholder="Enter your password"
+                      value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}

@@ -3,7 +3,6 @@ import MiniNavbar from "../components/MiniNavbar";
 import FormModal from "../components/FormModal";
 import { db, storage } from "../firebase/config";
 import { collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
-import "../About.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Events(props) {
@@ -46,7 +45,7 @@ function Events(props) {
       props.refreshApp()
       alert("EVENT ADDED")
     } catch (error) {
-      console.error(`COULD NOT ADD EVENT. Error Message: ${error}`);
+      alert(`COULD NOT ADD EVENT. Error Message: ${error}`);
     }
   };
 
