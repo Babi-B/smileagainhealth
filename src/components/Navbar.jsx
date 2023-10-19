@@ -1,18 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Header from "./Header";
 import ContactIcons from "./ContactIcons";
 import FormModal from "./FormModal";
+import SearchBar from "./SearchBar";
 import Logo from "../assets/pics/logo.png"
 
 function Navbar(props) {
+  const [searchResults, setSearchResults] = useState([])
+  const components = [
+    {
+      title: 'Home',
+      path: '/',
+      description: 'Welcome to the home page',
+      content: 'This is the main content of the home page',
+    },
+    {
+      title: 'Services',
+      path: '/services',
+      description: 'Explore our services. Different sicknesses, diseases, homecare treatments',
+      content: 'Here are the services we offer',
+    },
+    {
+      title: 'About Us',
+      path: '/about_us',
+      description: 'Learn about our company, our staff and administration',
+      content: 'Find out more about our mission and values',
+    },
+    {
+      title: 'Contact',
+      path: '/contact',
+      description: 'Learn about our company. Reach us on Whatsapp. volunteer. leave a message. write to us.',
+      content: 'Make an appointment. We also offer free consultations.',
+    },
+  ];
+
+  const handleSearch = (query) => {
+    const filteredResults = components.filter(component =>
+      component.title.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(filteredResults);
+  };
   
   
   return (
     <>
       <ContactIcons />
       <Header />
-      <nav className="navbar navbar-expand-md navbar-light sticky-top bg-white">
+      <nav className="navbar navbar-expand-lg navbar-light sticky-top bg-white">
         <div className="container-lg">
           <Link to="/" className="navbar-brand">
             <img src={Logo} alt="logo" id="logo" height="60" width="60" />
@@ -31,10 +66,10 @@ function Navbar(props) {
 
           {/* Actual Nav links */}
           <div
-            className="collapse navbar-collapse justify-content-end align-center"
+            className="collapse navbar-collapse row g-4 justify-content-end align-center"
             id="main-nav"
           >
-            <ul className="navbar-nav fw-bold">
+            <ul className="navbar-nav fw-bold col-sm-12 col-md-10">
               <li className="nav-item">
                 <Link to="/" className="nav-link navbar-link">
                   HOME
@@ -46,7 +81,7 @@ function Navbar(props) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/about_us" className="nav-link navbar-link">
+                <Link to="/about_us" className="nav-link navbar-link text-center">
                   ABOUT US
                 </Link>
               </li>
@@ -76,12 +111,12 @@ function Navbar(props) {
                 </div>
               </li>
               }
-              <li className="nav-item d-md-none">
+              <li className="nav-item d-lg-none">
                 <Link to="/appointment" className="nav-link navbar-link">
                   APPOINTMENT
                 </Link>
               </li>
-              <li className="nav-item d-md-none">
+              <li className="nav-item d-lg-none">
               { props.isLoggedIn ? 
                 <Link
                   className="nav-link navbar-link"
@@ -99,12 +134,12 @@ function Navbar(props) {
                 </Link>
                 }
               </li>
-              <li className="nav-item ms-2 d-none d-md-inline px-1 rounded" id="appoint-btn">
+              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded" id="appoint-btn">
                 <Link to="/appointment" className="nav-link text-white">
                   APPOINTMENT
                 </Link>
               </li>
-              <li className="nav-item ms-2 d-none d-md-inline px-1 rounded" id="signin">
+              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded" id="signin">
               { props.isLoggedIn ? 
                 <Link
                   className="nav-link text-white"
@@ -124,6 +159,12 @@ function Navbar(props) {
 
               </li>
             </ul>
+            <div className="col-sm-12 col-md-8">
+              <SearchBar 
+                onSearch={handleSearch}
+                components={components}
+                />
+            </div>
           </div>
         </div>
       </nav>

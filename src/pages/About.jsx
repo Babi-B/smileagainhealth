@@ -41,7 +41,7 @@ function About(props) {
                 <div className="container-lg py-5">
                     <h3 className="blue-text">Our Healthcare Administration</h3>
                     <div className="custom-hr mb-5"></div>
-                    <div className="row justify-content-center g-4 text-center"></div>
+                    <div className="row justify-content-center align-items-center g-4"></div>
                     {
                         props.staff.map((staff) => (
                             <Card 

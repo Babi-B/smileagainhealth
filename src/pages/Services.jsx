@@ -1,12 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import IntroVid from "../assets/videos/kampus.mp4"
 import HorizontalCard from "../components/HorizontalCard";
+import { useParams } from "react-router-dom";
 
 function Services(props) {
+    const { servicePointer } = useParams()
+    const targetServiceRef = useRef(null);
+
     useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
+    window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+    if (targetServiceRef.current) {
+        targetServiceRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    }, [props.services, servicePointer]);
+
     return(
         <>
             <MiniNavbar location="Services" location_url="/services"/>
@@ -34,15 +45,15 @@ function Services(props) {
                 <div className="container-lg py-5">
                     <h3 className="blue-text ">Some Of Our Services Include</h3>
                     <div className="custom-hr mb-5"></div>
-                    {props.services.map((service, index) => (
-                        <HorizontalCard 
-                        key={service.id}
-                        img={service.imageUrl}
-                        title={service.name}
-                        description={service.description}
-                    />
-                    ))}
-                    
+                    {props.services.map((service) => (
+                        <div key={service.id} ref={service.id === servicePointer ? targetServiceRef : null}>
+                            <HorizontalCard
+                                img={service.imageUrl}
+                                title={service.name}
+                                description={service.description}
+                            />
+                        </div>
+                    ))}   
                 </div>
             </section>
             <section className="bg-blue text-white text-center" >

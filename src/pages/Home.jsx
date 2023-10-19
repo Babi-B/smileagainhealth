@@ -8,12 +8,6 @@ import HorizontalCard from "../components/HorizontalCard";
 
 
 function Home(props) {
-    const styles = {
-        width: {
-            width: '18rem'
-        },
-        
-    }
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
@@ -114,6 +108,7 @@ function Home(props) {
                             description={service.description.length > 100
                                 ? `${service.description.substring(0, 100)}...`
                                 : service.description}
+                            servicePointer={service.id}
                             />
                         ))}    
                     </div>

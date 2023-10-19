@@ -166,6 +166,7 @@ function App() {
           <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} />}>
             <Route index element={<Home services={services} events={events}/>} />
             <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
+            <Route path="/services/:servicePointer" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/about_us" element={<About staff={staff}  />} />
             <Route path="/contact" element={<Contact messages={messages} refreshApp={refreshApp}  />} />
 

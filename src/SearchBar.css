@@ -1,0 +1,29 @@
+.search-input {
+  border-radius: 0;
+  width: 80%;
+}
+
+.search-result-link {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-title {
+  font-weight: bold;
+}
+
+.search-result-content {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.clear-icon {
+  border: none;
+  color: black;
+}

@@ -70,7 +70,12 @@ function Messages(props) {
                       <td>{message.name}</td>
                       <td>{message.email}</td>
                       <td>{message.phone}</td>
-                      <td>{message.message}</td>
+                      <td>{
+                        message.message.length > 100 ?
+                            `${message.message.substring(0, 100)}...`
+                            : message.message
+                      
+                      }</td>
                       <td className="btn">
                         <i 
                           className="fas fa-trash text-danger"
