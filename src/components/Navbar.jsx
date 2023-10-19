@@ -135,7 +135,7 @@ function Navbar(props) {
                 }
               </li>
               <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded text-lg-center" id="appoint-btn">
-                <a a href="https://wa.me/+237671752479" target="_blank" className="nav-link text-white">
+                <a href="https://wa.me/+237671752479" target="_blank" className="nav-link text-white">
                   APPOINTMENT
                 </a>
               </li>

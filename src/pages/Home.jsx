@@ -64,7 +64,7 @@ function Home(props) {
             {/* <!-- Mini Column --> */}
             <section id="mini-column">
                 <div className="text-center">
-                    <a href="https://wa.me/+237671752479" target="_blank" className="header-btn btn btn-danger btn-lg" >Make An Appointment</a>
+                    <a href="https://wa.me/+237671752479" target="_blank" className="header-btn btn bg-red text-white btn-lg" >Make An Appointment</a>
                 </div>
                 <div className="sectors container py-5">
                     <div className="row justify-content-center text-white gy-5 text-center">
