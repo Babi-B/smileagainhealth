@@ -5,13 +5,13 @@ import Timetable from "../components/Timetable";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/config";
 
-function Contact() {
-    const [messages, setMessages] = useState("");
+function Contact(props) {
+    const [messages, setMessages] = useState([]);
     const [name, setName] = useState("");
     const [title, setTitle] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [message, setMessage] = useState("");
+    const [description, setDescription] = useState("");
 
     const messageCollectionRef = collection(db, "messages")
 
@@ -28,7 +28,7 @@ function Contact() {
                 name, 
                 email, 
                 phone, 
-                message,
+                description,
             })
             
             const newMessage = {
@@ -36,14 +36,15 @@ function Contact() {
             name, 
             email, 
             phone, 
-            message,
+            description,
             id: docRef.id, 
             };
 
-        setMessage([...messages, newMessage]);
-        console.log("MESSAGE ADDED")
+        setMessages([...messages, newMessage]);
+        props.refreshApp()
+        alert("MESSAGE SENT")
         } catch (error) {
-        console.error(`COULD NOT ADD MESSAGE. Error Message: ${error}`);
+        alert(`COULD NOT ADD MESSAGE. Error Message: ${error}`);
         }
     };
 
@@ -128,7 +129,7 @@ function Contact() {
                               }}
                             required />
                       </div>
-                    <div className="form-group">
+                    <div className="form-group mt-3">
                         <label htmlFor="name" className="d-none">Name</label>
                         <input 
                             type="text" 
@@ -172,7 +173,7 @@ function Contact() {
                          rows="3" 
                          placeholder="Message*"
                          onChange={(e) => {
-                            setMessage(e.target.value);
+                            setDescription(e.target.value);
                           }}
                         required></textarea>
                     </div>

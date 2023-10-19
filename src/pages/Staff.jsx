@@ -7,7 +7,7 @@ import "../About.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Staff(props) {
-  const [staff, setStaff] = useState(props.staff);
+  const [allStaff, setStaff] = useState(props.staff);
   const [selectedStaff, setSelectedStaff] = useState(null);
   const [forEdit, setForEdit] = useState(false)
 
@@ -42,10 +42,11 @@ function Staff(props) {
         imageUrl: downloadURL, // Include the image URL in the new service object
       };
 
-      setStaff([...staff, newStaff]);
-      console.log("STAFF ADDED")
+      setStaff([...allStaff, newStaff]);
+      props.refreshApp()
+      alert("STAFF ADDED")
     } catch (error) {
-      console.error(`COULD NOT ADD STAFF. Error Message: ${error}`);
+      alert(`COULD NOT ADD STAFF. Error Message: ${error}`);
     }
   };
 
@@ -71,9 +72,9 @@ function Staff(props) {
         staff.id === staffId ? { ...staff, ...updatedStaff, imageUrl: downloadURL } : staff
       )
     );
-      console.log("Staff updated");
+      props.refreshApp()
+      alert("Staff updated");
     } catch (error) {
-      console.error(`COULD NOT UPDATE STAFF: ${error.message}`);
       alert(`COULD NOT UPDATE STAFF: ${error.message}`);
     }
   };
@@ -87,8 +88,8 @@ function Staff(props) {
       setStaff((prevStaff) =>
         prevStaff.filter((staff) => staff.id !== staffId)
       );
-      console.log("Staff deleted");
       props.refreshApp()
+      alert("Staff deleted");
     } catch (error) {
       console.error(`COULD NOT DELETE STAFF: ${error.message}`);
       alert(`COULD NOT DELETE STAFF: ${error.message}`);

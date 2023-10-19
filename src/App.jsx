@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
 import About from "./pages/About"
@@ -36,8 +36,9 @@ function App() {
 
 
   const refreshApp = () => {
-    setRefresh((prevRef) => !prevRef)
-  }
+    setRefresh((prevRef) => !prevRef);
+    window.location.reload();
+  };
 
   // FETCH ALL STAFF
   useEffect(() => {
@@ -149,7 +150,7 @@ function App() {
   const logout = async () => {
     try {
       await signOut(auth);
-      console.log('Signed Out...');
+      alert('Signed Out...');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -172,7 +173,7 @@ function App() {
 
             { isLoggedIn ?
               <>
-                <Route path="/dashboard/staff" element={<Staff staff={staff} refremessages={messages}shApp={refreshApp} />} /> 
+                <Route path="/dashboard/staff" element={<Staff staff={staff} refremessages={messages} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
                 <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} />} /> 

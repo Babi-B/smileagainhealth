@@ -39,14 +39,16 @@ function ContactIcons() {
       )}
 
         {showBackToTop && (
-        <img
-            src={Messenger}
-            alt="msger"
-            type="button"
-            className="btn btn-floating btn-lg"
-            id="msger"
-            onClick={backToTop}
-        />
+        <a href="https://www.facebook.com/profile.php?id=100091175119895&mibextid=ZbWKwL" target="_blank">
+          <img
+              src={Messenger}
+              alt="msger"
+              type="button"
+              className="btn btn-floating btn-lg"
+              id="msger"
+              onClick={backToTop}
+          />
+        </a>
         )}
 
       {showBackToTop && (

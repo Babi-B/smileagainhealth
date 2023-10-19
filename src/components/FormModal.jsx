@@ -14,8 +14,6 @@ function FormModal(props) {
   const [password, setPassword] = useState("");
   const [fileUpload, setFileUpload] = useState(null)
 
-  const error = "";
-
   console.log(`FORM TASK ID ${props.taskID}`)
 
   useEffect(() => {
@@ -54,12 +52,9 @@ function FormModal(props) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       clearValues();
-      console.log("LOGGED IN");
+      alert("SIGN IN SUCCESSFULL");
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // return error = "Invalid Email or Password"
-      alert(`SIGN IN FAILED: ${errorMessage}`);
+      alert(`SIGN IN FAILED`);
     }
   };
 
@@ -67,14 +62,12 @@ function FormModal(props) {
   const createManager = async () => {
     try {
       const manager = await createUserWithEmailAndPassword(auth, email, password, { name });
-      console.log("User Created")
+      alert("USER CREATED")
       props.addManager({name, email, password})
       clearValues();
       props.refreshApp()
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(`SIGN UP FAILED : ${errorMessage}`);
+      alert(`FAILED TO CREATE USER`);
     }
   };
 
@@ -82,13 +75,12 @@ function FormModal(props) {
     try {
       // Update the service data in Firebase Firestore
       await props.editManager(props.service.id, { name, description }, fileUpload);
-      console.log("Service updated");
+      alert("Service updated");
       props.setEditFalse();
       clearValues();
       props.refreshApp();
     } catch (error) {
-      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
-      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
+      alert(`COULD NOT UPDATE SERVICE`);
     }
   };
 
@@ -432,7 +424,6 @@ function FormModal(props) {
               </>
                 }
                 
-              <p className="text-danger">{error}</p>
               <div className="d-grid">
                 <button
                   className="btn btn-info text-white btn-lg bg-blue"

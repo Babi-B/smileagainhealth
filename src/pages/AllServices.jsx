@@ -43,9 +43,10 @@ function AllServices(props) {
       };
 
       setServices([...services, newService]);
-      console.log("SERVICE ADDED")
+      props.refreshApp()
+      alert("SERVICE ADDED")
     } catch (error) {
-      console.error(`COULD NOT ADD SERVICE. Error Message: ${error}`);
+      alert(`COULD NOT ADD SERVICE. Error Message: ${error}`);
     }
   };
 
@@ -71,9 +72,10 @@ function AllServices(props) {
         service.id === serviceId ? { ...service, ...updatedService, imageUrl: downloadURL } : service
       )
     );
-      console.log("Service updated");
+      props.refreshApp()
+      alert("Service updated");
     } catch (error) {
-      console.error(`COULD NOT UPDATE SERVICE: ${error.message}`);
+      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
     }
   };
@@ -87,10 +89,10 @@ function AllServices(props) {
       setServices((prevServices) =>
         prevServices.filter((service) => service.id !== serviceId)
       );
-      console.log("Service deleted");
       props.refreshApp()
+      alert("Service deleted");
     } catch (error) {
-      console.error(`COULD NOT DELETE SERVICE: ${error.message}`);
+      alert(`COULD NOT DELETE SERVICE: ${error.message}`);
       alert(`COULD NOT DELETE SERVICE: ${error.message}`);
     }
   };

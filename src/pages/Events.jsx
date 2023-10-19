@@ -43,7 +43,8 @@ function Events(props) {
       };
 
       setEvent([...events, newEvent]);
-      console.log("EVENT ADDED")
+      props.refreshApp()
+      alert("EVENT ADDED")
     } catch (error) {
       console.error(`COULD NOT ADD EVENT. Error Message: ${error}`);
     }
@@ -51,7 +52,6 @@ function Events(props) {
 
   // EDIT A EVENT
   const editEvent = async (eventId, updatedEvent, fileUpload) => {
-    console.log(`The file is ${fileUpload.name}`)
     try {
           // Upload the new image to Firebase Storage
     const storageRef = ref(storage, 'event-images/' + fileUpload.name);
@@ -72,9 +72,9 @@ function Events(props) {
         event.id === eventId ? { ...event, ...updatedEvent, imageUrl: downloadURL } : event
       )
     );
-      console.log("Event updated");
+      props.refreshApp()
+      alert("Event updated");
     } catch (error) {
-      console.error(`COULD NOT UPDATE EVENT: ${error.message}`);
       alert(`COULD NOT UPDATE EVENT: ${error.message}`);
     }
   };
@@ -88,10 +88,9 @@ function Events(props) {
       setEvent((prevEvent) =>
         prevEvent.filter((event) => event.id !== eventId)
       );
-      console.log("Event deleted");
       props.refreshApp()
+      alert("Event deleted");
     } catch (error) {
-      console.error(`COULD NOT DELETE EVENT: ${error.message}`);
       alert(`COULD NOT DELETE EVENT: ${error.message}`);
     }
   };

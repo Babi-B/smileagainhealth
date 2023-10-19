@@ -71,9 +71,9 @@ function Messages(props) {
                       <td>{message.email}</td>
                       <td>{message.phone}</td>
                       <td>{
-                        message.message.length > 100 ?
-                            `${message.message.substring(0, 100)}...`
-                            : message.message
+                        message.description.length > 100 ?
+                            `${message.description.substring(0, 100)}...`
+                            : message.description
                       
                       }</td>
                       <td className="btn">

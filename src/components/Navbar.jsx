@@ -69,7 +69,7 @@ function Navbar(props) {
             className="collapse navbar-collapse row g-4 justify-content-end align-center"
             id="main-nav"
           >
-            <ul className="navbar-nav fw-bold col-sm-12 col-md-10">
+            <ul className="navbar-nav fw-bold col-sm-12 col-md-10 px-2">
               <li className="nav-item">
                 <Link to="/" className="nav-link navbar-link">
                   HOME
@@ -81,7 +81,7 @@ function Navbar(props) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/about_us" className="nav-link navbar-link text-center">
+                <Link to="/about_us" className="nav-link navbar-link text-lg-center">
                   ABOUT US
                 </Link>
               </li>
@@ -112,9 +112,9 @@ function Navbar(props) {
               </li>
               }
               <li className="nav-item d-lg-none">
-                <Link to="/appointment" className="nav-link navbar-link">
+                <a a href="https://wa.me/+237671752479" target="_blank" className="nav-link navbar-link">
                   APPOINTMENT
-                </Link>
+                </a>
               </li>
               <li className="nav-item d-lg-none">
               { props.isLoggedIn ? 
@@ -134,12 +134,12 @@ function Navbar(props) {
                 </Link>
                 }
               </li>
-              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded" id="appoint-btn">
-                <Link to="/appointment" className="nav-link text-white">
+              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded text-lg-center" id="appoint-btn">
+                <a a href="https://wa.me/+237671752479" target="_blank" className="nav-link text-white">
                   APPOINTMENT
-                </Link>
+                </a>
               </li>
-              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded" id="signin">
+              <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded text-lg-center" id="signin">
               { props.isLoggedIn ? 
                 <Link
                   className="nav-link text-white"
@@ -159,7 +159,7 @@ function Navbar(props) {
 
               </li>
             </ul>
-            <div className="col-sm-12 col-md-8">
+            <div className="col-md-8 col-lg-4">
               <SearchBar 
                 onSearch={handleSearch}
                 components={components}
