@@ -114,6 +114,7 @@ function Home(props) {
                     </div>
                 </div>
             </section>
+            
             <Timetable />
             {/* <!-- Events Section --> */}
             {props.events &&

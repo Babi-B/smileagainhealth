@@ -12,7 +12,7 @@ function Navbar(props) {
     {
       title: 'Home',
       path: '/',
-      description: 'Welcome to the home page',
+      description: 'Welcome to the home page. Our events, timetable, available time, working hours',
       content: 'This is the main content of the home page',
     },
     {
@@ -24,7 +24,7 @@ function Navbar(props) {
     {
       title: 'About Us',
       path: '/about_us',
-      description: 'Learn about our company, our staff and administration',
+      description: 'Learn about our company, our staff and administration, timetable, available time, working hours, location, place, social links, located',
       content: 'Find out more about our mission and values',
     },
     {
@@ -135,7 +135,7 @@ function Navbar(props) {
                 }
               </li>
               <li className="nav-item ms-2 d-none d-lg-inline px-1 rounded text-lg-center" id="appoint-btn">
-                <a a href="https://wa.me/+237671752479" target="_blank" className="nav-link text-white">
+                <a href="https://wa.me/+237671752479" target="_blank" className="nav-link text-white">
                   APPOINTMENT
                 </a>
               </li>

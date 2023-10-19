@@ -106,7 +106,6 @@ function FormModal(props) {
 
   // FOR EVENT ** TASK ID: 5
   const createEvent = async () => {
-    alert(`Creating Event...`)
     try {
       // Save the event data to Firebase Firestore
       await props.addEvent({ name, description, place, time, date }, fileUpload);
