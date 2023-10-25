@@ -75,7 +75,7 @@ function Contact(props) {
                             </div>
                             <div className="">
                                 <i className="fas fa-envelope me-2 filter-green"></i>
-                                <p className="text-muted d-inline">sacfu@gmail.com</p>
+                                <p className="text-muted d-inline">sahomehealthcare.cmr@yahoo.com</p>
                             </div>
                         </div>&nbsp;
                         <div className="col-sm-8 col-md-4 col-lg-4 contact-item d-flex flex-column py-2 justify-content-center bg-white mb-3">
