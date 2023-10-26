@@ -125,7 +125,7 @@ function Messages(props) {
                     </div><hr />
                     <div>
                         <p className="fw-bold">Clent Message</p>
-                        <p>{selectedMessage.message}</p>
+                        <p>{selectedMessage.description}</p>
                     </div>
                 </div>
                 </div>
