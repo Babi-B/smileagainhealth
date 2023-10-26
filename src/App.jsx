@@ -30,6 +30,7 @@ function App() {
   const [testimonials, setTestimonials] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [timer, setTimer] = useState(null);
 
   const staffCollectionRef = collection(db, 'staff');
   const serviceCollectionRef = collection(db, "services");
@@ -180,6 +181,50 @@ function App() {
       );
     }
   };
+
+  // Sign out after 1 day of inactivity
+  useEffect(() => {
+    const userActivityTimeout = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+    // Function to sign out the user
+    const handleSignOut = async () => {
+      try {
+        await signOut(auth);
+        // Perform any additional actions after sign-out
+      } catch (error) {
+        // Handle sign-out error
+      }
+    };
+
+    // Function to reset the timer
+    const resetTimer = () => {
+      clearTimeout(timer);
+      setTimer(setTimeout(handleSignOut, userActivityTimeout));
+    };
+
+    // Start tracking user activity
+    window.addEventListener("mousemove", resetTimer);
+    window.addEventListener("keydown", resetTimer);
+
+    // Set up the Firebase auth state change listener
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, reset the timer
+        resetTimer();
+      } else {
+        // User is signed out, clear the timer
+        clearTimeout(timer);
+      }
+    });
+
+    // Clean up the event listeners and Firebase listener
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keydown", resetTimer);
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <>
