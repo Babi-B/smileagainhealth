@@ -28,22 +28,22 @@ function Home(props) {
                         <div className="carousel-item active" data-interval="100">
                             <img src={FemaleDoctor} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
-                            <h2>Get Treated At Home</h2>
-                            <p>Smile Again Home Health Care played a very vital role in the clients’ life by keeping them healthy and happy at home, because there is no place like Home.</p>
+                            <h3>Get Treated At Home</h3>
+                            <p className="small">Smile Again Home Health Care played a very vital role in the clients’ life by keeping them healthy and happy at home, because there is no place like Home.</p>
                             </div>
                         </div>
                         <div className="carousel-item" data-interval="100">
                             <img src={Injecting} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
-                            <h2>We Offer Home Care Services</h2>
-                            <p>Our services are available to the clients who are Homebound, Bedbound, Wheelchair bound, or needing assistance with Daily Activities of Living (ADL).</p>
+                            <h3>We Offer Home Care Services</h3>
+                            <p className="small">Our services are available to the clients who are Homebound, Bedbound, Wheelchair bound, or needing assistance with Daily Activities of Living (ADL).</p>
                             </div>
                         </div>
                         <div className="carousel-item" data-interval="100">
                             <img src={AvailableDoctor} className="d-block w-100" alt="..." />
                             <div className="carousel-caption">
-                            <h2>Safe and Reliable Care</h2>
-                            <p>Our services are always provided under direct supervision of the physician and approved Care Plan.</p>
+                            <h3>Safe and Reliable Care</h3>
+                            <p className="small">Our services are always provided under direct supervision of the physician and approved Care Plan.</p>
                             </div>
                         </div>
                         </div>
