@@ -30,10 +30,11 @@ function FormModal(props) {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      props.refreshApp();
       alert("SIGN IN SUCCESSFULL");
+      props.refreshApp();
     } catch (error) {
       alert(`SIGN IN FAILED`);
+      return
     }
   };
 
@@ -127,12 +128,35 @@ function FormModal(props) {
     }
   };
 
+  // FOR Testimonial ** TASK ID: 3
+  const createTestimonial = async () => {
+    try {
+      // Save the service data to Firebase Firestore
+      await props.addTestimonial({ name, description }, fileUpload);
+      props.refreshApp()
+    } catch (error) {
+      alert(`COULD NOT CREATE Testimonial : ${error.message}`);
+    }
+  };
+
+  const updateTestimonial = async () => {
+    try {
+      // Update the service data in Firebase Firestore
+      await props.editTestimonial(props.testimonial.id, { name, description }, fileUpload);
+      props.setEditFalse();
+      props.refreshApp();
+    } catch (error) {
+      alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
+    }
+  };
+
 
   // TASK ID 1 --> SIGN IN
-  // TASK ID 2 --> CREATE MANAGER
-  // TASK ID 3 --> CREATE SERVICE
-  // TASK ID 4 --> CREATE STAFF
-  // TASK ID 5 --> CREATE EVENT
+  // TASK ID 2 --> MANAGER
+  // TASK ID 3 --> SERVICE
+  // TASK ID 4 --> STAFF
+  // TASK ID 5 --> EVENT
+  // TASK ID 6 --> TESTIMONIAL
 
   useEffect(() => {
     if(props.forEdit) {
@@ -140,7 +164,11 @@ function FormModal(props) {
         setName(props.service.name);
         setDescription(props.service.description);
         setFileUpload(props.service.imageUrl);
-      } else if (props.taskID == 4) {
+      } else if (props.taskID == 6) {
+        setName(props.testimonial.name);
+        setDescription(props.testimonial.description);
+        setFileUpload(props.testimonial.imageUrl);
+      }else if (props.taskID == 4) {
         setName(props.staff.name);
         setDescription(props.staff.description);
         setFileUpload(props.staff.imageUrl);
@@ -281,8 +309,8 @@ function FormModal(props) {
                 </>
               }
 
-                {/* CREATE AND EDIT SERVICE AND STAFF */}
-                {props.taskID === 3 || props.taskID === 4 ?
+                {/* CREATE AND EDIT SERVICE, STAFF, AND TESTIMONIAL */}
+                {props.taskID === 3 || props.taskID === 4 || props.taskID === 6 ?
                 <>
                   <input 
                     type="file" 
@@ -423,7 +451,9 @@ function FormModal(props) {
                     createService: props.taskID === 4 && props.forEdit ?
                     updateStaff: props.taskID === 4 ?
                     createStaff: props.taskID === 5 && props.forEdit ?
-                    updateEvent: createEvent
+                    updateEvent:  props.taskID === 5 ?
+                    createEvent:  props.taskID === 6 && props.forEdit ?
+                    updateTestimonial:createTestimonial
                   }
                 >
                   {props.taskID === 1 ? 
@@ -434,7 +464,10 @@ function FormModal(props) {
                   "CREATE SERVICE": props.taskID === 4 && props.forEdit ?
                   "UPDATE STAFF": props.taskID === 4 ?
                   "ADD STAFF": props.taskID === 5 && props.forEdit ?
-                  "UPDATE EVENT":"ADD EVENT" }
+                  "UPDATE EVENT": props.taskID === 5?
+                  "ADD EVENT":props.taskID === 6 && props.forEdit ?
+                  "UPDATE TESTIMONY":"CREATE TESTIMONY"
+                }
                 </button>
               </div>
               </div>

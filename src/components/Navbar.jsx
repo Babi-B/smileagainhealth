@@ -108,6 +108,7 @@ function Navbar(props) {
                   <Link className="dropdown-item" to="/dashboard/events">All Events</Link>
                   <Link className="dropdown-item" to="/dashboard/managers">All Managers</Link>
                   <Link className="dropdown-item" to="/dashboard/messages">All Messages</Link>
+                  <Link className="dropdown-item" to="/dashboard/testimonials">All Testimonials</Link>
                 </div>
               </li>
               }
@@ -169,7 +170,7 @@ function Navbar(props) {
         </div>
       </nav>
       <Outlet />
-      <FormModal taskID={1}/>
+      <FormModal taskID={1} refreshApp={props.refreshApp} />
     </>
   );
 }

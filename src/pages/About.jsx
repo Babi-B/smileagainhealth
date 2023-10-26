@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MiniNavbar from "../components/MiniNavbar";
 import GroupPic from "../assets/pics/group.jpg"
 import Card from "../components/Card";
-import FemaleDoc from "../assets/pics/female_doc.png"
 import Timetable from "../components/Timetable";
 import "../About.css"
 
@@ -114,28 +113,27 @@ function About(props) {
 
 
                         {/* <!-- Testimonies --> */}
-                        <div id="testimonies" className=" col-md-12 col-lg-6">
-                            <h3 className="blue-text ">Testimonials</h3>
-                            <div className="custom-hr mb-5"></div>
-                            <div id="carousel">
-                                <div id="carouselExampleCaptions" className="carousel slide py-5 px-3" data-bs-ride="carousel">
-                                    <div className="carousel-inner text-center">
-                                    <div className="carousel-item active" data-interval="10">
-                                        <img src={FemaleDoc} alt="..." />
-                                        <p className="fst-italic">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur tenetur architecto obcaecati laborum itaque. Nihil quia amet architecto dolores at?</p>
-                                    </div>
-                                    <div className="carousel-item" data-interval="10">
-                                        <img src={FemaleDoc} alt="..." />
-                                        <p className="fst-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quis et praesentium eos sed? Voluptas, illum. Saepe delectus rem at?</p>
-                                    </div>
-                                    <div className="carousel-item" data-interval="10">
-                                        <img src={FemaleDoc} alt="..." />
-                                        <p className="fst-italic">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id mollitia atque corporis sapiente impedit dolorem velit aliquam, a nihil. Animi.</p>
-                                    </div>
+                        {props.testimonials ?
+                            (<div id="testimonies" className=" col-md-12 col-lg-6">
+                                <h3 className="blue-text ">Testimonials</h3>
+                                <div className="custom-hr mb-3"></div>
+                                <div id="carousel">
+                                    <div id="carouselExampleCaptions" className="carousel slide py-5 px-3" data-bs-ride="carousel">
+                                        <div className="carousel-inner text-center">
+                                            {
+                                                props.testimonials.map(testimonial => (
+                                                    <div className="carousel-item active" data-interval="10" key={testimonial.id}>
+                                                        <img src={testimonial.imageUrl} alt={testimonial.name} />
+                                                        <p className="mt-3 fw-bold">{testimonial.name}</p>
+                                                        <p className="fst-italic">{testimonial.description}</p>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>): null
+                        }
                     </div>
                 </div>
             </section>

@@ -17,6 +17,8 @@ import { getDocs, collection } from "firebase/firestore";
 
 import AllServices from "./pages/AllServices";
 import Managers from "./pages/Managers";
+import Testimonials from "./pages/Testimonials";
+
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
   const [events, setEvents] = useState([]);
   const [managers, setManagers] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
@@ -33,6 +36,7 @@ function App() {
   const eventCollectionRef = collection(db, "events");
   const managerCollectionRef = collection(db, "managers");
   const messageCollectionRef = collection(db, "messages");
+  const testimonialCollectionRef = collection(db, "testimonials");
 
 
   const refreshApp = () => {
@@ -136,6 +140,25 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  // FETCH ALL TESTIMONIALS
+  useEffect(() => {
+    const getTestimonialList = async () => {
+      try {
+        const data = await getDocs(testimonialCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setTestimonials(filteredData);
+      } catch (error) {
+        alert(`COULD NOT FETCH TESTIMONY DATA. Error Message: ${error}`);
+      }
+    };
+
+    getTestimonialList();
+    window.scrollTo(0, 0);
+  }, [refresh]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -148,7 +171,7 @@ function App() {
   const logout = async () => {
     try {
       await signOut(auth);
-      alert('Signed Out...');
+      alert('SIGN OUT SUCCESSFUL');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -162,11 +185,11 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} />}>
+          <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} refreshApp={refreshApp} />}>
             <Route index element={<Home services={services} events={events}/>} />
             <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/services/:servicePointer" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
-            <Route path="/about_us" element={<About staff={staff}  />} />
+            <Route path="/about_us" element={<About staff={staff} testimonials={testimonials}  />} />
             <Route path="/contact" element={<Contact messages={messages} refreshApp={refreshApp}  />} />
 
             { isLoggedIn ?
@@ -176,6 +199,7 @@ function App() {
                 <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} />} /> 
                 <Route path="/dashboard/messages" element={<Messages messages={messages}  refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/testimonials" element={<Testimonials testimonials={testimonials}  refreshApp={refreshApp} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />
