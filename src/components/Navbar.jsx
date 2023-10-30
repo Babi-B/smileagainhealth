@@ -42,7 +42,6 @@ function Navbar(props) {
     setSearchResults(filteredResults);
   };
   
-  
   return (
     <>
       <ContactIcons />
@@ -54,6 +53,7 @@ function Navbar(props) {
           </Link>
           <button
             className="navbar-toggler"
+            id="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#main-nav"
@@ -76,17 +76,17 @@ function Navbar(props) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/services" className="nav-link navbar-link">
+                <Link to="/services" className="nav-link navbar-link" onClick={props.handleAutoCloseComponentClick}>
                   SERVICES
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/about_us" className="nav-link navbar-link text-lg-center">
+                <Link to="/about_us" className="nav-link navbar-link text-lg-center" onClick={props.handleAutoCloseComponentClick}>
                   ABOUT US
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/contact" className="nav-link navbar-link">
+                <Link to="/contact" className="nav-link navbar-link" onClick={props.handleAutoCloseComponentClick}>
                   CONTACT
                 </Link>
               </li>
@@ -98,26 +98,27 @@ function Navbar(props) {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
-                    aria-expanded="false">
+                    aria-expanded="false"
+                    >
                   DASHBOARD
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {/* <Link className="dropdown-item" to="/dashboard/managers">All Managers</Link> */}
-                  <Link className="dropdown-item" to="/dashboard/staff">All Staff</Link>
-                  <Link className="dropdown-item" to="/dashboard/services">All Services</Link>
-                  <Link className="dropdown-item" to="/dashboard/events">All Events</Link>
-                  <Link className="dropdown-item" to="/dashboard/managers">All Managers</Link>
-                  <Link className="dropdown-item" to="/dashboard/messages">All Messages</Link>
-                  <Link className="dropdown-item" to="/dashboard/testimonials">All Testimonials</Link>
+                  <Link className="dropdown-item" to="/dashboard/staff" onClick={props.handleAutoCloseComponentClick}>All Staff</Link>
+                  <Link className="dropdown-item" to="/dashboard/services" onClick={props.handleAutoCloseComponentClick}>All Services</Link>
+                  <Link className="dropdown-item" to="/dashboard/events" onClick={props.handleAutoCloseComponentClick}>All Events</Link>
+                  <Link className="dropdown-item" to="/dashboard/managers" onClick={props.handleAutoCloseComponentClick}>All Managers</Link>
+                  <Link className="dropdown-item" to="/dashboard/messages" onClick={props.handleAutoCloseComponentClick}>All Messages</Link>
+                  <Link className="dropdown-item" to="/dashboard/testimonials" onClick={props.handleAutoCloseComponentClick}>All Testimonials</Link>
                 </div>
               </li>
               }
-              <li className="nav-item d-lg-none">
+              <li className="nav-item d-lg-none" onClick={props.handleAutoCloseComponentClick}>
                 <a href="https://wa.me/+237671752479" target="_blank" className="nav-link navbar-link">
                   APPOINTMENT
                 </a>
               </li>
-              <li className="nav-item d-lg-none">
+              <li className="nav-item d-lg-none" onClick={props.handleAutoCloseComponentClick} >
               { props.isLoggedIn ? 
                 <Link
                   className="nav-link navbar-link"
@@ -170,7 +171,7 @@ function Navbar(props) {
         </div>
       </nav>
       <Outlet />
-      <FormModal taskID={1} refreshApp={props.refreshApp} />
+      <FormModal taskID={1} refreshApp={props.refreshApp} handleAutoCloseComponentClick={props.handleAutoCloseComponentClick} />
     </>
   );
 }

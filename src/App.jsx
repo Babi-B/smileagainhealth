@@ -39,7 +39,6 @@ function App() {
   const messageCollectionRef = collection(db, "messages");
   const testimonialCollectionRef = collection(db, "testimonials");
 
-
   const refreshApp = () => {
     setRefresh((prevRef) => !prevRef);
     window.location.reload();
@@ -182,6 +181,20 @@ function App() {
     }
   };
 
+  // Collapse popups after click
+  const handleAutoCloseComponentClick = () => {
+    if (window.innerWidth < 992) {
+      // Collapse the navbar
+      const navbarToggler = document.getElementById("navbar-toggler");
+      const btnClose = document.getElementById("btn-close");
+      if (navbarToggler) {
+        navbarToggler.click();
+      }else if(btnClose) {
+        btnClose.click()
+      }
+    }
+  };
+
   // Sign out after 1 day of inactivity
   useEffect(() => {
     const userActivityTimeout = 24 * 60 * 60 * 1000; // 1 day in milliseconds
@@ -230,8 +243,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} refreshApp={refreshApp} />}>
-            <Route index element={<Home services={services} events={events}/>} />
+          <Route path="/" element={<Navbar isLoggedIn={isLoggedIn} logout={logout} refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick} />}>
+            <Route index path="/" element={<Home services={services} events={events}/>} />
             <Route path="/services" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/services/:servicePointer" element={<Services isLoggedIn={isLoggedIn} services={services}  />} />
             <Route path="/about_us" element={<About staff={staff} testimonials={testimonials}  />} />
@@ -239,12 +252,12 @@ function App() {
 
             { isLoggedIn ?
               <>
-                <Route path="/dashboard/staff" element={<Staff staff={staff} refremessages={messages} refreshApp={refreshApp} />} /> 
-                <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp}  />} /> 
-                <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} />} /> 
-                <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/staff" element={<Staff staff={staff} refremessages={messages} refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick} />} /> 
+                <Route path="/dashboard/services" element={<AllServices services={services} refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick}  />} /> 
+                <Route path="/dashboard/events" element={<Events events={events} refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick} />} /> 
+                <Route path="/dashboard/managers" element={<Managers managers={managers} refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick} />} /> 
                 <Route path="/dashboard/messages" element={<Messages messages={messages}  refreshApp={refreshApp} />} /> 
-                <Route path="/dashboard/testimonials" element={<Testimonials testimonials={testimonials}  refreshApp={refreshApp} />} /> 
+                <Route path="/dashboard/testimonials" element={<Testimonials testimonials={testimonials}  refreshApp={refreshApp} handleAutoCloseComponentClick={handleAutoCloseComponentClick} />} /> 
               </>
                 :
               <Route path="*" element={<NotFound />} />

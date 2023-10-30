@@ -163,6 +163,7 @@ function Staff(props) {
           forEdit={forEdit}
           setEditFalse={() => setForEdit(false)}
           refreshApp={props.refreshApp}
+          handleAutoCloseComponentClick={props.handleAutoCloseComponentClick}
         />
     </>
   );

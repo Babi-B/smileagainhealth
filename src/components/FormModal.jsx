@@ -12,6 +12,7 @@ function FormModal(props) {
   const [place, setPlace] = useState("");
 
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
   const [fileUpload, setFileUpload] = useState(null)
 
   // CLEAR INPUT VALUES
@@ -26,11 +27,17 @@ function FormModal(props) {
       setFileUpload(null)
   }
 
+  // Password Visibility
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword); 
+  };
+
   // SIGN IN
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("SIGN IN SUCCESSFULL");
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`SIGN IN FAILED`);
@@ -44,6 +51,7 @@ function FormModal(props) {
       const manager = await createUserWithEmailAndPassword(auth, email, password, { name });
       alert("MANAGER CREATED")
       props.addManager({name, email, password})
+      props.handleAutoCloseComponentClick()
       props.refreshApp()
     } catch (error) {
       alert(`FAILED TO CREATE MANAGER`);
@@ -55,6 +63,7 @@ function FormModal(props) {
       // Update the service data in Firebase Firestore
       await props.editManager(props.service.id, { name, description }, fileUpload);
       props.setEditFalse();
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE SERVICE`);
@@ -66,6 +75,7 @@ function FormModal(props) {
     try {
       // Save the service data to Firebase Firestore
       await props.addService({ name, description }, fileUpload);
+      props.handleAutoCloseComponentClick()
       props.refreshApp()
     } catch (error) {
       alert(`COULD NOT CREATE SERVICE : ${error.message}`);
@@ -77,6 +87,7 @@ function FormModal(props) {
       // Update the service data in Firebase Firestore
       await props.editService(props.service.id, { name, description }, fileUpload);
       props.setEditFalse();
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
@@ -88,6 +99,7 @@ function FormModal(props) {
     try {
       // Save the service data to Firebase Firestore
       await props.addStaff({ name, description }, fileUpload);
+      props.handleAutoCloseComponentClick()
       props.refreshApp()
     } catch (error) {
       alert(`COULD NOT CREATE STAFF : ${error.message}`);
@@ -99,6 +111,7 @@ function FormModal(props) {
       // Update the service data in Firebase Firestore
       await props.editStaff(props.staff.id, { name, description }, fileUpload);
       props.setEditFalse();
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE STAFF: ${error.message}`);
@@ -110,6 +123,7 @@ function FormModal(props) {
     try {
       // Save the event data to Firebase Firestore
       await props.addEvent({ name, description, place, time, date }, fileUpload);
+      props.handleAutoCloseComponentClick()
       props.refreshApp()
     } catch (error) {
       alert(`COULD NOT CREATE EVENT : ${error.message}`);
@@ -122,6 +136,7 @@ function FormModal(props) {
       await props.editEvent(props.event.id, { name, description, place, time, date }, fileUpload);
       alert("Event updated");
       props.setEditFalse();
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE EVENT: ${error.message}`);
@@ -133,6 +148,7 @@ function FormModal(props) {
     try {
       // Save the service data to Firebase Firestore
       await props.addTestimonial({ name, description }, fileUpload);
+      props.handleAutoCloseComponentClick()
       props.refreshApp()
     } catch (error) {
       alert(`COULD NOT CREATE Testimonial : ${error.message}`);
@@ -144,6 +160,7 @@ function FormModal(props) {
       // Update the service data in Firebase Firestore
       await props.editTestimonial(props.testimonial.id, { name, description }, fileUpload);
       props.setEditFalse();
+      props.handleAutoCloseComponentClick()
       props.refreshApp();
     } catch (error) {
       alert(`COULD NOT UPDATE SERVICE: ${error.message}`);
@@ -208,6 +225,7 @@ function FormModal(props) {
               <button
                 type="button"
                 className="btn-close"
+                id="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={clearValues}
@@ -239,9 +257,19 @@ function FormModal(props) {
                     <label htmlFor="password" className="form-label">
                       <i className="fas fa-lock me-2 text-secondary"></i>
                       Password
-                    </label>
+                    </label> 
+                    <span
+                        className="ms-2 text-secondary"
+                        onClick={handlePasswordToggle}
+                      >
+                        {showPassword ? (
+                          <i className="fas fa-eye-slash"></i>
+                        ) : (
+                          <i className="fas fa-eye"></i>
+                        )}
+                    </span>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       className="form-control"
                       id="password"
                       placeholder="Enter your password"
